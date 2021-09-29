@@ -14,7 +14,7 @@ export class CBuffer implements IBitcodec<Buffer> {
   }
 
   encode = (value: Buffer, buffer?: Buffer, offset = 0): Buffer => {
-    if (!Buffer.isBuffer(value)) throw new TypeError("value must be a Buffer instance"); // for UArray encode iter
+    if (!Buffer.isBuffer(value)) throw new TypeError("value must be a Buffer instance"); // for CArray encode iter
     if (value.length !== this.length) throw new RangeError("value.length is out of bounds");
     if (!buffer) return Buffer.from(value);
     if (offset + this.length > buffer.length) throw new RangeError("destination buffer is too small");
