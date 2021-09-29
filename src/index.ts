@@ -1,10 +1,11 @@
 import { CArray } from "./lib/CArray";
 import { CBuffer } from "./lib/CBuffer";
-
 import { NumberTypes } from "./models/NumberTypes";
 import { CNumber } from "./lib/CNumber";
-
+import { CObject } from "./lib/CObject";
 import { CVarArray } from "./lib/CVarArray";
+import { CVarBuffer } from "./lib/CVarBuffer";
+import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
 
 export default {
   Array: CArray,
@@ -30,5 +31,8 @@ export default {
     DoubleBE: new CNumber(NumberTypes.DoubleBE, 8),
     DoubleLE: new CNumber(NumberTypes.DoubleLE, 8),
   },
+  Object: CObject,
   VarArray: CVarArray,
+  VarBuffer: CVarBuffer,
+  VarUIntBitcoin: new CVarUIntBitcoin(),
 };

@@ -5,10 +5,10 @@ import { CBuffer } from "./CBuffer";
 export class CVarArray implements IBitcodec<any[]> {
   private length: number = -1;
   private lengthType: IBitcodec<any>;
-  private cBuffer: CBuffer;
+  private anyCodec: IBitcodec<any>;
 
   private calcLength = (items: any[]) => {
-    return util.size(items, this.cBuffer.encodingLength, this.lengthType.encodingLength(items.length));
+    return util.size(items, this.anyCodec.encodingLength, this.lengthType.encodingLength(items.length));
   };
 
   encodingLength = (array?: any[]): number => {
@@ -19,9 +19,9 @@ export class CVarArray implements IBitcodec<any[]> {
   encodeBytes: number = -1;
   decodeBytes: number = -1;
 
-  constructor(lengthType: IBitcodec<any>, cBuffer: CBuffer) {
+  constructor(lengthType: IBitcodec<any>, anyCodec: IBitcodec<any>) {
     this.lengthType = lengthType;
-    this.cBuffer = cBuffer;
+    this.anyCodec = anyCodec;
   }
 
   encode = (value: any[], buffer?: Buffer, offset = 0): Buffer => {
@@ -29,8 +29,8 @@ export class CVarArray implements IBitcodec<any[]> {
 
     this.lengthType.encode(value.length, buffer, offset);
 
-    const typeEncode = this.cBuffer.encode;
-    const typeEncodeBytes = this.cBuffer.encodeBytes;
+    const typeEncode = this.anyCodec.encode;
+    const typeEncodeBytes = this.anyCodec.encodeBytes;
     const lengthTypeEncodeBytes = this.lengthType.encodeBytes;
 
     this.encodeBytes =
@@ -50,8 +50,8 @@ export class CVarArray implements IBitcodec<any[]> {
     if (!offset) offset = 0;
     const items = new Array(this.lengthType.decode(buffer, offset, end));
 
-    const typeDecode = this.cBuffer.decode;
-    const typeDecodeBytes = this.cBuffer.decodeBytes;
+    const typeDecode = this.anyCodec.decode;
+    const typeDecodeBytes = this.anyCodec.decodeBytes;
     const lengthTypeDecodeBytes = this.lengthType.decodeBytes;
 
     this.decodeBytes =
