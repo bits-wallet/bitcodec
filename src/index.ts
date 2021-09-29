@@ -4,6 +4,8 @@ import { CBuffer } from "./lib/CBuffer";
 import { NumberTypes } from "./models/NumberTypes";
 import { CNumber } from "./lib/CNumber";
 
+import { CVarArray } from "./lib/CVarArray";
+
 export default {
   Array: CArray,
   Buffer: CBuffer,
@@ -28,4 +30,5 @@ export default {
     DoubleBE: new CNumber(NumberTypes.DoubleBE, 8),
     DoubleLE: new CNumber(NumberTypes.DoubleLE, 8),
   },
+  VarArray: CVarArray,
 };
