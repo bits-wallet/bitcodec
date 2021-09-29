@@ -1,7 +1,10 @@
 import { NumberTypes } from "./models/NumberTypes";
 import { CNumber } from "./lib/CNumber";
+import { CBuffer } from "./lib/CBuffer";
 
 export default {
+  Buffer: CBuffer,
+
   Byte: new CNumber(NumberTypes.UInt8, 1),
   Int8: new CNumber(NumberTypes.Int8, 1),
   UInt8: new CNumber(NumberTypes.UInt8, 1),
