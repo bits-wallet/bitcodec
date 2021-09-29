@@ -4,6 +4,7 @@ const CArray_1 = require("./lib/CArray");
 const CBuffer_1 = require("./lib/CBuffer");
 const NumberTypes_1 = require("./models/NumberTypes");
 const CNumber_1 = require("./lib/CNumber");
+const CVarArray_1 = require("./lib/CVarArray");
 exports.default = {
     Array: CArray_1.CArray,
     Buffer: CBuffer_1.CBuffer,
@@ -28,5 +29,6 @@ exports.default = {
         DoubleBE: new CNumber_1.CNumber(NumberTypes_1.NumberTypes.DoubleBE, 8),
         DoubleLE: new CNumber_1.CNumber(NumberTypes_1.NumberTypes.DoubleLE, 8),
     },
+    VarArray: CVarArray_1.CVarArray,
 };
 //# sourceMappingURL=index.js.map
