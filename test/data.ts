@@ -311,16 +311,16 @@ export const varuintbitData = {
   invalid: [
     {
       dec: -1,
-      msg: "^RangeError: value out of range$",
+      msg: "value out of range",
     },
     {
       dec: 9007199254740992,
       hex: "ffffffffff00002000",
-      msg: "^RangeError: value out of range$",
+      msg: "value out of range",
     },
     {
       dec: 0.1,
-      msg: "^RangeError: value out of range$",
+      msg: "value out of range",
     },
   ],
 };
