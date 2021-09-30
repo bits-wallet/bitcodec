@@ -4,10 +4,10 @@ import { CBuffer } from "./CBuffer";
 
 export class CArray implements IBitcodec<any[]> {
   private length: number;
-  private cBuffer: CBuffer;
+  private anyCodec: IBitcodec<any>;
 
   private calcLength = (items: any[]) => {
-    return util.size(items, this.cBuffer.encodingLength);
+    return util.size(items, this.anyCodec.encodingLength);
   };
 
   encodingLength = (array?: any[]): number => {
@@ -19,9 +19,9 @@ export class CArray implements IBitcodec<any[]> {
   encodeBytes: number;
   decodeBytes: number;
 
-  constructor(length: number, cBuffer: CBuffer) {
+  constructor(length: number, anyCodec: IBitcodec<any>) {
     this.length = length;
-    this.cBuffer = cBuffer;
+    this.anyCodec = anyCodec;
     this.encodeBytes = length;
     this.decodeBytes = length;
   }
@@ -30,8 +30,8 @@ export class CArray implements IBitcodec<any[]> {
     if (value.length !== this.length) throw new RangeError("value.length is out of bounds");
     if (!buffer) buffer = Buffer.allocUnsafe(this.calcLength(value));
 
-    const typeEncode = this.cBuffer.encode;
-    const typeEncodeBytes = this.cBuffer.encodeBytes;
+    const typeEncode = this.anyCodec.encode;
+    const typeEncodeBytes = this.anyCodec.encodeBytes;
 
     this.encodeBytes =
       util.size(
@@ -49,8 +49,8 @@ export class CArray implements IBitcodec<any[]> {
     if (!offset) offset = 0;
     const items = new Array(this.length);
 
-    const typeDecode = this.cBuffer.decode;
-    const typeDecodeBytes = this.cBuffer.decodeBytes;
+    const typeDecode = this.anyCodec.decode;
+    const typeDecodeBytes = this.anyCodec.decodeBytes;
 
     this.decodeBytes =
       util.size(
