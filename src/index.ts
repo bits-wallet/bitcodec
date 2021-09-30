@@ -3,6 +3,7 @@ import { CBuffer } from "./lib/CBuffer";
 import { NumberTypes } from "./models/NumberTypes";
 import { CNumber } from "./lib/CNumber";
 import { CObject } from "./lib/CObject";
+import { CString } from "./lib/CString";
 import { CVarArray } from "./lib/CVarArray";
 import { CVarBuffer } from "./lib/CVarBuffer";
 import { CVarString } from "./lib/CVarString";
@@ -33,6 +34,7 @@ export default {
     DoubleLE: new CNumber(NumberTypes.DoubleLE, 8),
   },
   Object: CObject,
+  String: CString,
   VarArray: CVarArray,
   VarBuffer: CVarBuffer,
   VarString: CVarString,

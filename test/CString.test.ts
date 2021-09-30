@@ -1,0 +1,17 @@
+import { randomBytes } from "crypto";
+import bitcodec from "../src";
+import { EncodingType } from "../src/models/EncodingType";
+
+test("String 1", () => {
+  const encodingTypes: EncodingType[] = ["base64", "binary", "hex"];
+  encodingTypes.forEach((encodingType) => {
+    const length = 42;
+    const s = randomBytes(length).toString(encodingType);
+    const fixedstring = new bitcodec.String(length, encodingType);
+    expect(fixedstring.decode(fixedstring.encode(s))).toEqual(s);
+  });
+});
+
+test("String 2", () => {
+  expect(new bitcodec.String(42).encodingLength(null)).toEqual(42);
+});
