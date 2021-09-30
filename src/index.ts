@@ -5,6 +5,7 @@ import { CNumber } from "./lib/CNumber";
 import { CObject } from "./lib/CObject";
 import { CVarArray } from "./lib/CVarArray";
 import { CVarBuffer } from "./lib/CVarBuffer";
+import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
 
 export default {
@@ -34,5 +35,6 @@ export default {
   Object: CObject,
   VarArray: CVarArray,
   VarBuffer: CVarBuffer,
+  VarString: CVarString,
   VarUIntBitcoin: new CVarUIntBitcoin(),
 };
