@@ -1,43 +1,58 @@
 import bitcodec from "../src";
-import { txDataArray } from "./data";
 
-const TxInput = new bitcodec.Object([
-  { name: "hash", type: new bitcodec.Buffer(32) },
-  { name: "index", type: bitcodec.Number.UInt32LE },
-  { name: "script", type: new bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
-  { name: "sequence", type: bitcodec.Number.UInt32LE },
+const objectCodec = new bitcodec.Object([
+  { name: "number", type: bitcodec.Number.UInt8 },
+  { name: "foobar", type: new bitcodec.Buffer(8) },
 ]);
 
-const TxOutput = new bitcodec.Object([
-  { name: "value", type: bitcodec.Number.UInt64LE },
-  { name: "script", type: new bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
-]);
+test("object encode 1", () => {
+  expect(() => objectCodec.encode({ number: 0xfe, foobar: Buffer.alloc(8) }, Buffer.allocUnsafe(3))).toThrow("destination buffer is too small");
+});
 
-const Tx = new bitcodec.Object([
-  { name: "version", type: bitcodec.Number.UInt32LE },
-  { name: "ins", type: new bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput) },
-  { name: "outs", type: new bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput) },
-  { name: "locktime", type: bitcodec.Number.UInt32LE },
-]);
+test("object encode 2", () => {
+  const o = { number: 0xfe, foobar: Buffer.alloc(8) };
 
-const isHex = (s: string) => s.length % 2 === 0 && /^[0-9a-f]*$/.test(s);
+  let result = objectCodec.encode(o);
+  expect(objectCodec.encodeBytes).toEqual(9);
+  expect(result.toString("hex")).toEqual("fe0000000000000000");
 
-const hex2buffer = (obj: object) => {
-  for (var k in obj) {
-    if (Array.isArray(obj[k])) obj[k] = obj[k].map(hex2buffer);
-    else if (typeof obj[k] === "string" && isHex(obj[k])) obj[k] = Buffer.from(obj[k], "hex");
-  }
-  return obj;
-};
+  result.fill(0);
+  objectCodec.encode(o, result, 0);
+  expect(result.toString("hex")).toEqual("fe0000000000000000");
 
-test("tx", () => {
-  txDataArray.forEach((txData) => {
-    const result = Tx.encode(hex2buffer(txData.raw));
-    expect(result.toString("hex")).toEqual(txData.hex);
-  });
+  // offset > 0 case
+  result = Buffer.alloc(19);
+  objectCodec.encode(o, result, 10);
+  expect(objectCodec.encodeBytes).toEqual(9);
+  expect(result.slice(10).toString("hex")).toEqual("fe0000000000000000");
+});
 
-  txDataArray.forEach((txData) => {
-    const result = Tx.decode(Buffer.from(txData.hex, "hex"));
-    expect(result).toEqual(txData.raw);
-  });
+test("object encode 2", () => {
+  const o = { number: 0xfe, foobar: Buffer.alloc(8) };
+  expect(() => objectCodec.decode(Buffer.from("deadbe", "hex"))).toThrow("not enough data for decode");
+
+  objectCodec.decode(Buffer.from("fe0000000000000000ffffffffff", "hex"));
+
+  const result = objectCodec.decode(Buffer.from("fffffe0000000000000000", "hex"), 2);
+  expect(result).toEqual(o);
+  expect(objectCodec.decodeBytes).toEqual(9);
+});
+
+test("object 2", () => {
+  const objectCodec2 = new bitcodec.Object([
+    { name: "a", type: new bitcodec.VarString(bitcodec.Number.UInt16LE) },
+    { name: "b", type: new bitcodec.VarString(bitcodec.Number.UInt8) },
+    { name: "c", type: new bitcodec.Buffer(8) },
+  ]);
+
+  const data = {
+    a: "foobarbazzz",
+    b: "",
+    c: Buffer.alloc(8, 0xff),
+  };
+
+  const buffer = objectCodec2.encode(data);
+  expect(objectCodec2.encodeBytes).toEqual(22);
+  expect(objectCodec2.decode(buffer)).toEqual(data);
+  expect(objectCodec2.decodeBytes).toEqual(22);
 });
