@@ -8,10 +8,13 @@ import { CVarArray } from "./lib/CVarArray";
 import { CVarBuffer } from "./lib/CVarBuffer";
 import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
+import { IBitcodec } from "./models/IBitcodec";
+import { BitcodecItem } from "./models/BitcodecItem";
+import { EncodingType } from "./models/EncodingType";
 
 export default {
-  Array: CArray,
-  Buffer: CBuffer,
+  Array: (length: number, anyCodec: IBitcodec<any>) => new CArray(length, anyCodec),
+  Buffer: (length: number) => new CBuffer(length),
   Byte: new CNumber(NumberTypes.UInt8, 1),
   Number: {
     Int8: new CNumber(NumberTypes.Int8, 1),
@@ -33,10 +36,10 @@ export default {
     DoubleBE: new CNumber(NumberTypes.DoubleBE, 8),
     DoubleLE: new CNumber(NumberTypes.DoubleLE, 8),
   },
-  Object: CObject,
-  String: CString,
-  VarArray: CVarArray,
-  VarBuffer: CVarBuffer,
-  VarString: CVarString,
+  Object: (items: BitcodecItem[]) => new CObject(items),
+  String: (length: number, encodingType: EncodingType = "utf8") => new CString(length, encodingType),
+  VarArray: (lengthType: IBitcodec<any>, anyCodec: IBitcodec<any>) => new CVarArray(lengthType, anyCodec),
+  VarBuffer: (anyCodec: IBitcodec<any>) => new CVarBuffer(anyCodec),
+  VarString: (anyCodec: IBitcodec<any>, encodingType: EncodingType = "utf8") => new CVarString(anyCodec, encodingType),
   VarUIntBitcoin: new CVarUIntBitcoin(),
 };
