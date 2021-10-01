@@ -1,25 +1,22 @@
+import { BitcodecItem } from "../models/BitcodecItem";
 import { IBitcodec } from "../models/IBitcodec";
 
-type BitcodecItem = {
-  name: string;
-  type: IBitcodec<any>;
-};
-
 export class CObject implements IBitcodec<object> {
-  private items: BitcodecItem[];
+  private items: { name: string; type: IBitcodec<any> }[];
 
   encodeBytes: number;
   decodeBytes: number;
   encodingLength: (t?: object) => number;
 
   constructor(items: BitcodecItem[]) {
-    this.items = items;
+    this.items = items.map((item: BitcodecItem) => (Array.isArray(item) ? { name: item[0], type: item[1] } : item));
+
     this.encodeBytes = 0;
     this.decodeBytes = 0;
 
     this.encodingLength = (o?: object): number => {
       if (o === undefined) throw new TypeError("Expected Object, got " + o);
-      return this.items.reduce((previousValue: number, currentValue: BitcodecItem) => {
+      return this.items.reduce((previousValue: number, currentValue: { name: string; type: IBitcodec<any> }) => {
         const value = (o as any)[currentValue.name];
         return previousValue + currentValue.type.encodingLength(value);
       }, 0);
