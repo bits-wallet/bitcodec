@@ -1,26 +1,26 @@
 import bitcodec from "../../src";
 
+export const TxVersion = bitcodec.Number.UInt32LE;
 export const TxInput = bitcodec.Object([
   { name: "hash", type: bitcodec.Buffer(32) },
   { name: "index", type: bitcodec.Number.UInt32LE },
   { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
   { name: "sequence", type: bitcodec.Number.UInt32LE },
 ]);
-
 export const TxInputs = bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput);
 
 export const TxOutput = bitcodec.Object([
   { name: "value", type: bitcodec.Number.UInt64LE },
   { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
 ]);
-
 export const TxOutputs = bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput);
+export const TxLocktime = bitcodec.Number.UInt32LE;
 
 export const Tx = bitcodec.Object([
-  { name: "version", type: bitcodec.Number.UInt32LE },
+  { name: "version", type: TxVersion },
   { name: "ins", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput) },
   { name: "outs", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput) },
-  { name: "locktime", type: bitcodec.Number.UInt32LE },
+  { name: "locktime", type: TxLocktime },
 ]);
 
 export function buffer2hex(obj) {
