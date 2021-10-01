@@ -7,11 +7,11 @@ test("String 1", () => {
   encodingTypes.forEach((encodingType) => {
     const length = 42;
     const s = randomBytes(length).toString(encodingType);
-    const fixedstring = new bitcodec.String(length, encodingType);
+    const fixedstring = bitcodec.String(length, encodingType);
     expect(fixedstring.decode(fixedstring.encode(s))).toEqual(s);
   });
 });
 
 test("String 2", () => {
-  expect(new bitcodec.String(42).encodingLength(null)).toEqual(42);
+  expect(bitcodec.String(42).encodingLength()).toEqual(42);
 });

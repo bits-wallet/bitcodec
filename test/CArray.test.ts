@@ -1,6 +1,6 @@
 import bitcodec from "../src";
 
-const array42 = new bitcodec.Array(42, new bitcodec.Buffer(42));
+const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
 
 test("Array encode errors", () => {
   expect(() => array42.encode(new Array(41))).toThrow("value.length is out of bounds");
@@ -31,12 +31,12 @@ test("Array decode errors", () => {
 });
 
 test("Array encodingLength errors", () => {
-  const array42 = new bitcodec.Array(42, new bitcodec.Buffer(42));
+  const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
   expect(() => array42.encodingLength(new Array(41))).toThrow("value.length is out of bounds");
   expect(() => array42.encodingLength()).toThrow("value must be an Array instance");
 });
 
 test("Array encodingLength", () => {
-  const array42 = new bitcodec.Array(42, new bitcodec.Buffer(42));
+  const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
   expect(array42.encodingLength(new Array(42))).toEqual(42 * 42);
 });

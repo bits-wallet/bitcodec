@@ -1,22 +1,22 @@
 import bitcodec from "../src";
-import { txDataArray } from "./data";
+import { txData as data } from "./data/tx";
 
-const TxInput = new bitcodec.Object([
-  { name: "hash", type: new bitcodec.Buffer(32) },
+const TxInput = bitcodec.Object([
+  { name: "hash", type: bitcodec.Buffer(32) },
   { name: "index", type: bitcodec.Number.UInt32LE },
-  { name: "script", type: new bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
+  { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
   { name: "sequence", type: bitcodec.Number.UInt32LE },
 ]);
 
-const TxOutput = new bitcodec.Object([
+const TxOutput = bitcodec.Object([
   { name: "value", type: bitcodec.Number.UInt64LE },
-  { name: "script", type: new bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
+  { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
 ]);
 
-const Tx = new bitcodec.Object([
+const Tx = bitcodec.Object([
   { name: "version", type: bitcodec.Number.UInt32LE },
-  { name: "ins", type: new bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput) },
-  { name: "outs", type: new bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput) },
+  { name: "ins", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput) },
+  { name: "outs", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput) },
   { name: "locktime", type: bitcodec.Number.UInt32LE },
 ]);
 
@@ -46,13 +46,13 @@ test("tx", () => {
 });
 
 /* test("tx", () => {
-  txDataArray.forEach((txData) => {
-    const result = Tx.encode(hex2buffer(txData.raw));
-    expect(result.toString("hex")).toEqual(txData.hex);
+  data.forEach((d) => {
+    const result = Tx.encode(hex2buffer(d.raw));
+    expect(result.toString("hex")).toEqual(d.hex);
   });
 
-  txDataArray.forEach((txData) => {
-    const result = Tx.decode(Buffer.from(txData.hex, "hex"));
-    expect(result).toEqual(txData.raw);
+  data.forEach((d) => {
+    const result = Tx.decode(Buffer.from(d.hex, "hex"));
+    expect(result).toEqual(d.raw);
   });
 }); */

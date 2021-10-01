@@ -1,6 +1,6 @@
 import bitcodec from "../src";
 
-const varArray = new bitcodec.VarArray(bitcodec.Number.UInt32BE, new bitcodec.Buffer(42));
+const varArray = bitcodec.VarArray(bitcodec.Number.UInt32BE, bitcodec.Buffer(42));
 
 test("VarArray encode errors", () => {
   expect(() => varArray.encode(new Array(42), Buffer.allocUnsafe(3))).toThrow("Attempt to access memory outside buffer bounds");

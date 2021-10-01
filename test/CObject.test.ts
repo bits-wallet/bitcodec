@@ -1,9 +1,6 @@
 import bitcodec from "../src";
 
-const objectCodec = new bitcodec.Object([
-  { name: "number", type: bitcodec.Number.UInt8 },
-  { name: "foobar", type: new bitcodec.Buffer(8) },
-]);
+const objectCodec = bitcodec.Object([{ name: "number", type: bitcodec.Number.UInt8 }, ["foobar", bitcodec.Buffer(8)]]);
 
 test("object encode 1", () => {
   expect(() => objectCodec.encode({ number: 0xfe, foobar: Buffer.alloc(8) }, Buffer.allocUnsafe(3))).toThrow("destination buffer is too small");
@@ -39,10 +36,10 @@ test("object encode 2", () => {
 });
 
 test("object 2", () => {
-  const objectCodec2 = new bitcodec.Object([
-    { name: "a", type: new bitcodec.VarString(bitcodec.Number.UInt16LE) },
-    { name: "b", type: new bitcodec.VarString(bitcodec.Number.UInt8) },
-    { name: "c", type: new bitcodec.Buffer(8) },
+  const objectCodec2 = bitcodec.Object([
+    { name: "a", type: bitcodec.VarString(bitcodec.Number.UInt16LE) },
+    { name: "b", type: bitcodec.VarString(bitcodec.Number.UInt8) },
+    { name: "c", type: bitcodec.Buffer(8) },
   ]);
 
   const data = {

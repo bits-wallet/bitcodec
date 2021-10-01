@@ -1,6 +1,6 @@
 import bitcodec from "../src";
 
-const varBuffer = new bitcodec.VarBuffer(bitcodec.Number.UInt32BE);
+const varBuffer = bitcodec.VarBuffer(bitcodec.Number.UInt32BE);
 
 test("encode", () => {
   expect(() => varBuffer.encode(Buffer.allocUnsafe(42), Buffer.allocUnsafe(41))).toThrow("destination buffer is too small");

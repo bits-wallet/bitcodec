@@ -1,6 +1,6 @@
 import bitcodec from "../src";
 
-const buffer42 = new bitcodec.Buffer(42);
+const buffer42 = bitcodec.Buffer(42);
 
 test("Buffer encodingLength", () => {
   expect(buffer42.encodingLength()).toEqual(42);
