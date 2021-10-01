@@ -1,23 +1,32 @@
 import bitcodec from "../../src";
 
-export const TxVersion = bitcodec.Number.UInt32LE;
+export const TxVersion = bitcodec.Number.UInt32LE; // int32_t
 export const TxInput = bitcodec.Object([
   { name: "hash", type: bitcodec.Buffer(32) },
   { name: "index", type: bitcodec.Number.UInt32LE },
   { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
-  { name: "sequence", type: bitcodec.Number.UInt32LE },
+  { name: "sequence", type: bitcodec.Number.UInt32LE }, // uint32_t
 ]);
 export const TxInputs = bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput);
 
 export const TxOutput = bitcodec.Object([
-  { name: "value", type: bitcodec.Number.UInt64LE },
+  { name: "value", type: bitcodec.Number.UInt64LE }, // int64_t
   { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
 ]);
 export const TxOutputs = bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput);
-export const TxLocktime = bitcodec.Number.UInt32LE;
+export const TxLocktime = bitcodec.Number.UInt32LE; // uint32_t
 
 export const Tx = bitcodec.Object([
   { name: "version", type: TxVersion },
+  { name: "ins", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput) }, // compactSize uint
+  { name: "outs", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput) }, // compactSize uint
+  { name: "locktime", type: TxLocktime },
+]);
+
+export const TxWitness = bitcodec.Object([
+  { name: "version", type: TxVersion },
+  { name: "marker", type: bitcodec.Byte },
+  { name: "flag", type: bitcodec.Byte },
   { name: "ins", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput) },
   { name: "outs", type: bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput) },
   { name: "locktime", type: TxLocktime },
