@@ -29,18 +29,14 @@ export class CVarArray implements IBitcodec<any[]> {
 
     this.lengthType.encode(value.length, buffer, offset);
 
-    const typeEncode = this.anyCodec.encode;
-    const typeEncodeBytes = this.anyCodec.encodeBytes;
-    const lengthTypeEncodeBytes = this.lengthType.encodeBytes;
-
     this.encodeBytes =
       util.size(
         value,
         (item, index, loffset) => {
-          typeEncode(item, buffer, loffset);
-          return typeEncodeBytes;
+          this.anyCodec.encode(item, buffer, loffset);
+          return this.anyCodec.encodeBytes;
         },
-        lengthTypeEncodeBytes + offset
+        this.lengthType.encodeBytes + offset
       ) - offset;
 
     return buffer;
@@ -50,18 +46,14 @@ export class CVarArray implements IBitcodec<any[]> {
     if (!offset) offset = 0;
     const items = new Array(this.lengthType.decode(buffer, offset, end));
 
-    const typeDecode = this.anyCodec.decode;
-    const typeDecodeBytes = this.anyCodec.decodeBytes;
-    const lengthTypeDecodeBytes = this.lengthType.decodeBytes;
-
     this.decodeBytes =
       util.size(
         items,
         (item, index, loffset) => {
-          items[index || 0] = typeDecode(buffer, loffset, end);
-          return typeDecodeBytes;
+          items[index || 0] = this.anyCodec.decode(buffer, loffset, end);
+          return this.anyCodec.decodeBytes;
         },
-        lengthTypeDecodeBytes + offset
+        this.lengthType.decodeBytes + offset
       ) - offset;
     return items;
   };
