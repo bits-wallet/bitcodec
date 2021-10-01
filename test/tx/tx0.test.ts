@@ -1,11 +1,18 @@
 import { txData as data, txDataHashes } from "../data/tx";
-import { buffer2hex, hex2buffer, TxInput, TxInputs, TxOutput, TxOutputs } from "./helper";
+import { buffer2hex, hex2buffer, TxInput, TxInputs, TxLocktime, TxOutput, TxOutputs, TxVersion } from "./helper";
 
 const index = 0;
 const tx = data[index];
 const hexes = txDataHashes[index];
 
 // encode
+test("encode data[" + index + "].version", () => {
+  const testHex = hexes.version;
+
+  const resultBuffer = TxVersion.encode(tx.raw.version);
+  expect(buffer2hex(resultBuffer)).toEqual(testHex);
+});
+
 tx.raw.ins.forEach((txInput, i) => {
   test("encode data[" + index + "].ins[" + i + "]", () => {
     const testHex = hexes.in[i];
@@ -38,7 +45,21 @@ test("encode data[" + index + "].outs", () => {
   expect(buffer2hex(result)).toEqual(testHex);
 });
 
+test("encode data[" + index + "].locktime", () => {
+  const testHex = hexes.locktime;
+
+  const resultBuffer = TxLocktime.encode(tx.raw.locktime);
+  expect(buffer2hex(resultBuffer)).toEqual(testHex);
+});
+
 // decode
+test("decode data[" + index + "].version", () => {
+  const testHex = hexes.version;
+
+  const result = TxVersion.decode(hex2buffer(testHex));
+  expect(result).toEqual(tx.raw.version);
+});
+
 tx.raw.ins.forEach((txInput, i) => {
   test("decode data[" + index + "].ins[" + i + "] ", () => {
     const testHex = hexes.in[i];
@@ -69,4 +90,11 @@ test("decode data[" + index + "].outs", () => {
 
   const result = TxOutputs.decode(hex2buffer(testHex));
   expect(result).toEqual(tx.raw.outs);
+});
+
+test("decode data[" + index + "].locktime", () => {
+  const testHex = hexes.locktime;
+
+  const result = TxLocktime.decode(hex2buffer(testHex));
+  expect(result).toEqual(tx.raw.locktime);
 });
