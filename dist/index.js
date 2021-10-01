@@ -4,10 +4,15 @@ const CArray_1 = require("./lib/CArray");
 const CBuffer_1 = require("./lib/CBuffer");
 const NumberTypes_1 = require("./models/NumberTypes");
 const CNumber_1 = require("./lib/CNumber");
+const CObject_1 = require("./lib/CObject");
+const CString_1 = require("./lib/CString");
 const CVarArray_1 = require("./lib/CVarArray");
+const CVarBuffer_1 = require("./lib/CVarBuffer");
+const CVarString_1 = require("./lib/CVarString");
+const CVarUIntBitcoin_1 = require("./lib/CVarUIntBitcoin");
 exports.default = {
-    Array: CArray_1.CArray,
-    Buffer: CBuffer_1.CBuffer,
+    Array: (length, anyCodec) => new CArray_1.CArray(length, anyCodec),
+    Buffer: (length) => new CBuffer_1.CBuffer(length),
     Byte: new CNumber_1.CNumber(NumberTypes_1.NumberTypes.UInt8, 1),
     Number: {
         Int8: new CNumber_1.CNumber(NumberTypes_1.NumberTypes.Int8, 1),
@@ -29,6 +34,11 @@ exports.default = {
         DoubleBE: new CNumber_1.CNumber(NumberTypes_1.NumberTypes.DoubleBE, 8),
         DoubleLE: new CNumber_1.CNumber(NumberTypes_1.NumberTypes.DoubleLE, 8),
     },
-    VarArray: CVarArray_1.CVarArray,
+    Object: (items) => new CObject_1.CObject(items),
+    String: (length, encodingType = "utf8") => new CString_1.CString(length, encodingType),
+    VarArray: (lengthType, anyCodec) => new CVarArray_1.CVarArray(lengthType, anyCodec),
+    VarBuffer: (anyCodec) => new CVarBuffer_1.CVarBuffer(anyCodec),
+    VarString: (anyCodec, encodingType = "utf8") => new CVarString_1.CVarString(anyCodec, encodingType),
+    VarUIntBitcoin: new CVarUIntBitcoin_1.CVarUIntBitcoin(),
 };
 //# sourceMappingURL=index.js.map

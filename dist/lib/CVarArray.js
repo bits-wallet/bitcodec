@@ -24,9 +24,9 @@ const util = __importStar(require("../util"));
 class CVarArray {
     length = -1;
     lengthType;
-    cBuffer;
+    anyCodec;
     calcLength = (items) => {
-        return util.size(items, this.cBuffer.encodingLength, this.lengthType.encodingLength(items.length));
+        return util.size(items, this.anyCodec.encodingLength, this.lengthType.encodingLength(items.length));
     };
     encodingLength = (array) => {
         if (array === undefined)
@@ -35,16 +35,16 @@ class CVarArray {
     };
     encodeBytes = -1;
     decodeBytes = -1;
-    constructor(lengthType, cBuffer) {
+    constructor(lengthType, anyCodec) {
         this.lengthType = lengthType;
-        this.cBuffer = cBuffer;
+        this.anyCodec = anyCodec;
     }
     encode = (value, buffer, offset = 0) => {
         if (!buffer)
             buffer = Buffer.allocUnsafe(this.calcLength(value));
         this.lengthType.encode(value.length, buffer, offset);
-        const typeEncode = this.cBuffer.encode;
-        const typeEncodeBytes = this.cBuffer.encodeBytes;
+        const typeEncode = this.anyCodec.encode;
+        const typeEncodeBytes = this.anyCodec.encodeBytes;
         const lengthTypeEncodeBytes = this.lengthType.encodeBytes;
         this.encodeBytes =
             util.size(value, (item, index, loffset) => {
@@ -57,8 +57,8 @@ class CVarArray {
         if (!offset)
             offset = 0;
         const items = new Array(this.lengthType.decode(buffer, offset, end));
-        const typeDecode = this.cBuffer.decode;
-        const typeDecodeBytes = this.cBuffer.decodeBytes;
+        const typeDecode = this.anyCodec.decode;
+        const typeDecodeBytes = this.anyCodec.decodeBytes;
         const lengthTypeDecodeBytes = this.lengthType.decodeBytes;
         this.decodeBytes =
             util.size(items, (item, index, loffset) => {

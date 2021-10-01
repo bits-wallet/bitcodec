@@ -23,9 +23,9 @@ exports.CArray = void 0;
 const util = __importStar(require("../util"));
 class CArray {
     length;
-    cBuffer;
+    anyCodec;
     calcLength = (items) => {
-        return util.size(items, this.cBuffer.encodingLength);
+        return util.size(items, this.anyCodec.encodingLength);
     };
     encodingLength = (array) => {
         if (array === undefined)
@@ -36,9 +36,9 @@ class CArray {
     };
     encodeBytes;
     decodeBytes;
-    constructor(length, cBuffer) {
+    constructor(length, anyCodec) {
         this.length = length;
-        this.cBuffer = cBuffer;
+        this.anyCodec = anyCodec;
         this.encodeBytes = length;
         this.decodeBytes = length;
     }
@@ -47,8 +47,8 @@ class CArray {
             throw new RangeError("value.length is out of bounds");
         if (!buffer)
             buffer = Buffer.allocUnsafe(this.calcLength(value));
-        const typeEncode = this.cBuffer.encode;
-        const typeEncodeBytes = this.cBuffer.encodeBytes;
+        const typeEncode = this.anyCodec.encode;
+        const typeEncodeBytes = this.anyCodec.encodeBytes;
         this.encodeBytes =
             util.size(value, function (item, index, loffset) {
                 typeEncode(item, buffer, loffset);
@@ -60,8 +60,8 @@ class CArray {
         if (!offset)
             offset = 0;
         const items = new Array(this.length);
-        const typeDecode = this.cBuffer.decode;
-        const typeDecodeBytes = this.cBuffer.decodeBytes;
+        const typeDecode = this.anyCodec.decode;
+        const typeDecodeBytes = this.anyCodec.decodeBytes;
         this.decodeBytes =
             util.size(items, function (item, index, loffset) {
                 items[index || 0] = typeDecode(buffer, loffset, end);
