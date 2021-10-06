@@ -1,0 +1,10 @@
+{
+  "name": "@bitmatrix/bitcodec",
+  "version": "1.0.0",
+  "description": "bitcodec",
+  "main": "index.js",
+  "dependencies": {
+    "@bitmatrix/int53": "^1.0.2"
+  },
+  "license": "MIT"
+}

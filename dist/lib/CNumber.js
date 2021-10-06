@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CNumber = void 0;
-const int53_1 = require("../ext/int53");
+const int53_1 = require("@bitmatrix/int53");
 class CNumber {
     length;
     write;
