@@ -1,4 +1,4 @@
-import { Int53Type, readInt53, writeInt53 } from "../ext/int53";
+import { Int53Type, readInt53, writeInt53 } from "@bitmatrix/int53";
 import { IBitcodec } from "../models/IBitcodec";
 import { NumberTypes } from "../models/NumberTypes";
 
