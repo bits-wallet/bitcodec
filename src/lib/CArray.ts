@@ -33,6 +33,13 @@ export class CArray implements IBitcodec<any[]> {
     const typeEncode = this.anyCodec.encode;
     const typeEncodeBytes = this.anyCodec.encodeBytes;
 
+    /* this.encodeBytes =
+      value.reduce((previusValue, currentItem, _) => {
+        this.anyCodec.encode(currentItem, buffer, previusValue);
+        const newAnyCodecEncodeBytes = this.anyCodec.encodeBytes;
+        return previusValue + newAnyCodecEncodeBytes;
+      }, offset) - offset; */
+
     this.encodeBytes =
       util.size(
         value,
@@ -51,6 +58,13 @@ export class CArray implements IBitcodec<any[]> {
 
     const typeDecode = this.anyCodec.decode;
     const typeDecodeBytes = this.anyCodec.decodeBytes;
+
+    /* this.decodeBytes =
+      items.reduce((previusValue, currentItem, currentIndex) => {
+        items[currentIndex] = this.anyCodec.decode(buffer, previusValue, end);
+        const newAnyCodecDecodeBytes = this.anyCodec.decodeBytes;
+        return previusValue + newAnyCodecDecodeBytes;
+      }, offset + offset) - offset; */
 
     this.decodeBytes =
       util.size(

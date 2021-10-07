@@ -1,6 +1,9 @@
-// changed reduce: default value, auto sum
-export const size = (items: any[], iter: (a: any, index?: number, ac?: number) => number, acc: number = 0) => {
-  if (acc === undefined) acc = 0;
-  for (let i = 0; i < items.length; ++i) acc += iter(items[i], i, acc);
-  return acc;
+export const size = <T>(items: T[], iter: (item?: T, index?: number, ac?: number) => number, acc: number = 0) => {
+  let result = acc;
+  for (let i = 0; i < items.length; i++) result += iter(items[i], i, result);
+  return result;
+
+  /* return items.reduce((previusValue, currentItem, currentIndex) => {
+    return previusValue + iter(items[currentIndex], currentIndex, previusValue);
+  }, acc); */
 };
