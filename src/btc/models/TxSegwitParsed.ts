@@ -13,4 +13,5 @@ export type TxSegwitParsed = {
     script: string;
   }[];
   witness: string[][];
+  locktime: number;
 };

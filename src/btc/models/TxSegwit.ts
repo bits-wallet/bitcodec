@@ -13,4 +13,5 @@ export type TxSegwit = {
     value: number;
     script: string;
   }[];
+  locktime: number;
 };
