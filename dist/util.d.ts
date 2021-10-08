@@ -1,1 +1,1 @@
-export declare const size: (items: any[], iter: (a: any, index?: number | undefined, ac?: number | undefined) => number, acc?: number) => number;
+export declare const size: <T>(items: T[], iter: (item?: T | undefined, index?: number | undefined, ac?: number | undefined) => number, acc?: number) => number;

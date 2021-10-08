@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { IBitcodec } from "../models/IBitcodec";
 import { NumberTypes } from "../models/NumberTypes";
 export declare class CNumber implements IBitcodec<number> {

@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CVarUIntBitcoin implements IBitcodec<number> {
     private MAX_SAFE_INTEGER;

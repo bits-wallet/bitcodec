@@ -1,3 +1,7 @@
+import { IBitcodec } from "./models/IBitcodec";
+import { BitcodecItem } from "./models/BitcodecItem";
+import { EncodingType } from "./models/EncodingType";
+import { CAllBuffer } from "./lib/CAllBuffer";
 import { CArray } from "./lib/CArray";
 import { CBuffer } from "./lib/CBuffer";
 import { CNumber } from "./lib/CNumber";
@@ -7,10 +11,8 @@ import { CVarArray } from "./lib/CVarArray";
 import { CVarBuffer } from "./lib/CVarBuffer";
 import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
-import { IBitcodec } from "./models/IBitcodec";
-import { BitcodecItem } from "./models/BitcodecItem";
-import { EncodingType } from "./models/EncodingType";
 declare const _default: {
+    AllBuffer: CAllBuffer;
     Array: (length: number, anyCodec: IBitcodec<any>) => CArray;
     Buffer: (length: number) => CBuffer;
     Byte: CNumber;

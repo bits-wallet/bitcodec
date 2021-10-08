@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { BitcodecItem } from "../models/BitcodecItem";
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CObject implements IBitcodec<object> {
