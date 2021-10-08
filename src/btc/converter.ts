@@ -8,6 +8,7 @@ export const toTxSegwit = (txSegwitParsed: TxSegwitParsed): TxSegwit => {
     flag: txSegwitParsed.flag,
     inputs: [],
     outputs: txSegwitParsed.outputs,
+    locktime: txSegwitParsed.locktime,
   };
 
   txSegwitParsed.inputs.forEach((input, index) => {
