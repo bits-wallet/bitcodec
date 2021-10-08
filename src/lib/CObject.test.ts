@@ -1,4 +1,4 @@
-import bitcodec from "../src";
+import bitcodec from "../";
 
 const objectCodec = bitcodec.Object([{ name: "number", type: bitcodec.Number.UInt8 }, ["foobar", bitcodec.Buffer(8)]]);
 

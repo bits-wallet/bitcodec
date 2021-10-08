@@ -1,4 +1,4 @@
-import bitcodec from "../src";
+import bitcodec from "../";
 
 const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
 

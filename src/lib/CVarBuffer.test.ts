@@ -1,4 +1,4 @@
-import bitcodec from "../src";
+import bitcodec from "../";
 
 const varBuffer = bitcodec.VarBuffer(bitcodec.Number.UInt32BE);
 

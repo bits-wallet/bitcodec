@@ -1,6 +1,6 @@
 import { randomBytes } from "crypto";
-import bitcodec from "../src";
-import { EncodingType } from "../src/models/EncodingType";
+import bitcodec from "../";
+import { EncodingType } from "../models/EncodingType";
 
 test("String 1", () => {
   const encodingTypes: EncodingType[] = ["base64", "binary", "hex"];

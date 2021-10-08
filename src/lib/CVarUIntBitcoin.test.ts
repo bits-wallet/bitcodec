@@ -1,5 +1,5 @@
-import bitcodec from "../src";
-import { varUIntBitcoinData as data } from "./data/varUIntBitcoin";
+import bitcodec from "../";
+import { varUIntBitcoinData as data } from "./test/varUIntBitcoin";
 
 // valid
 test("valid encode #", () => {
