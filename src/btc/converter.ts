@@ -32,6 +32,7 @@ export const toTxSegwitParsed = (txSegwit: TxSegwit): TxSegwitParsed => {
     inputs: [],
     outputs: txSegwit.outputs,
     witness: [],
+    locktime: txSegwit.locktime,
   };
 
   txSegwit.inputs.forEach((input, index) => {
