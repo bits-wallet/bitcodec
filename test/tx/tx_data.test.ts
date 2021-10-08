@@ -1,9 +1,10 @@
+import { buffer2hex, hex2buffer } from "../../src/btc/helper";
+import { Tx } from "../../src/btc/someCodecs";
 import { txData as data } from "../data/tx";
-import { buffer2hex, hex2buffer, Tx } from "./helper";
 
 const tx = {
   version: 1,
-  ins: [
+  inputs: [
     {
       hash: "d8c8df6a6fdd2addaf589a83d860f18b44872d13ee6ec3526b2b470d42a96d4d",
       index: 0,
@@ -19,7 +20,7 @@ const tx = {
       sequence: 4294967295,
     },
   ],
-  outs: [
+  outputs: [
     {
       value: 39000000,
       script: "76a914a3d89c53bb956f08917b44d113c6b2bcbe0c29b788ac",

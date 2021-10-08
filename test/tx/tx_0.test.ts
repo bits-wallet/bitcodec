@@ -1,5 +1,6 @@
 import { txData as data } from "../data/tx";
-import { buffer2hex, hex2buffer, Tx } from "./helper";
+import { Tx } from "../../src/btc/someCodecs";
+import { buffer2hex, hex2buffer } from "../../src/btc/helper";
 
 // encode
 data.forEach((d, i) => {

@@ -1,8 +1,7 @@
 import { btc } from "../../src";
 import { data } from "../data/tx_segwit";
 import { TxWitnessBase } from "../../src/btc/someCodecs";
-
-import { buffer2hex, hex2buffer } from "./helper";
+import { buffer2hex, hex2buffer } from "../../src/btc/helper";
 
 test("tx decode tx_segwit.raw", () => {
   const txHex = data.hex;

@@ -1,5 +1,5 @@
-import { txData as data } from "../data/tx";
-import { buffer2hex, hex2buffer, TxWitness } from "./helper";
+import { buffer2hex, hex2buffer } from "../../src/btc/helper";
+import { TxWitness } from "../../src/btc/someCodecs";
 
 // https://bitcoindata.science/bitcoin-raw-transaction-hex.html
 

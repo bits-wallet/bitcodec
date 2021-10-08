@@ -78,7 +78,7 @@ export const txData = [
     description: "Standard transaction (1:1)",
     raw: {
       version: 1,
-      ins: [
+      inputs: [
         {
           hash: "f1fefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefe",
           index: 0,
@@ -87,7 +87,7 @@ export const txData = [
           sequence: 4294967295,
         },
       ],
-      outs: [
+      outputs: [
         {
           script: "76a914c42e7ef92fdb603af844d064faad95db9bcdfd3d88ac",
           value: 100000,
@@ -102,7 +102,7 @@ export const txData = [
     description: "Standard transaction (2:2)",
     raw: {
       version: 1,
-      ins: [
+      inputs: [
         {
           hash: "f1fefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefe",
           index: 0,
@@ -118,7 +118,7 @@ export const txData = [
           sequence: 2147483648,
         },
       ],
-      outs: [
+      outputs: [
         {
           script: "76a914c42e7ef92fdb603af844d064faad95db9bcdfd3d88ac",
           value: 50000,
@@ -138,7 +138,7 @@ export const txData = [
     raw: {
       version: 1,
       locktime: 0,
-      ins: [
+      inputs: [
         {
           hash: "e7b73e229790c1e79a02f0c871813b3cf26a4156c5b8d942e88b38fe8d3f43a0",
           index: 0,
@@ -238,7 +238,7 @@ export const txData = [
           sequence: 4294967295,
         },
       ],
-      outs: [
+      outputs: [
         {
           value: 52680000,
           script: "76a914167c3e1f10cc3b691c73afbdb211e156e3e3f25c88ac",
@@ -257,7 +257,7 @@ export const txData = [
     hex: "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff29032832051c4d696e656420627920416e74506f6f6c20626a343a45ef0454c5de8d5e5300004e2c0000ffffffff01414f1995000000001976a914b05793fe86a9f51a5f5ae3a6f07fd31932128a3f88ac00000000",
     raw: {
       version: 1,
-      ins: [
+      inputs: [
         {
           hash: "0000000000000000000000000000000000000000000000000000000000000000",
           index: 4294967295,
@@ -265,7 +265,7 @@ export const txData = [
           sequence: 4294967295,
         },
       ],
-      outs: [
+      outputs: [
         {
           script: "76a914b05793fe86a9f51a5f5ae3a6f07fd31932128a3f88ac",
           value: 2501463873,
@@ -281,7 +281,7 @@ export const txData = [
     raw: {
       version: 1,
       locktime: 0,
-      ins: [
+      inputs: [
         {
           hash: "9ac03d5ae6a875d970128ef9086cef276a1919684a6988023cc7254691d97e6d",
           index: 1,
@@ -290,7 +290,7 @@ export const txData = [
           sequence: 4294967295,
         },
       ],
-      outs: [
+      outputs: [
         {
           script: "01",
           value: 1,

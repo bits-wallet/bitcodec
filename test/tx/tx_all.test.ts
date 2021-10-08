@@ -1,5 +1,6 @@
 import { txData as data, txData, txDataHashes } from "../data/tx";
-import { buffer2hex, hex2buffer, TxInput, TxInputs, TxLocktime, TxOutput, TxOutputs, TxVersion } from "./helper";
+import { Tx, TxInput, TxInputs, TxLocktime, TxOutput, TxOutputs, TxVersion } from "../../src/btc/someCodecs";
+import { buffer2hex, hex2buffer } from "../../src/btc/helper";
 
 const testAll = (index: number) => {
   const tx = data[index];
@@ -13,8 +14,8 @@ const testAll = (index: number) => {
     expect(buffer2hex(resultBuffer)).toEqual(testHex);
   });
 
-  tx.raw.ins.forEach((txInput, i) => {
-    test("encode data[" + index + "].ins[" + i + "]", () => {
+  tx.raw.inputs.forEach((txInput, i) => {
+    test("encode data[" + index + "].inputs[" + i + "]", () => {
       const testHex = hexes.in[i];
 
       const result = TxInput.encode(hex2buffer(txInput));
@@ -22,8 +23,8 @@ const testAll = (index: number) => {
     });
   });
 
-  tx.raw.outs.forEach((txOutput, i) => {
-    test("encode data[" + index + "].outs[" + i + "]", () => {
+  tx.raw.outputs.forEach((txOutput, i) => {
+    test("encode data[" + index + "].outputs[" + i + "]", () => {
       const testHex = hexes.out[i];
 
       const result = TxOutput.encode(hex2buffer(txOutput));
@@ -31,17 +32,17 @@ const testAll = (index: number) => {
     });
   });
 
-  test("encode data[" + index + "].ins", () => {
+  test("encode data[" + index + "].inputs", () => {
     const testHex = hexes.ins;
 
-    const result = TxInputs.encode(hex2buffer(tx.raw.ins));
+    const result = TxInputs.encode(hex2buffer(tx.raw.inputs));
     expect(buffer2hex(result)).toEqual(testHex);
   });
 
-  test("encode data[" + index + "].outs", () => {
+  test("encode data[" + index + "].outputs", () => {
     const testHex = hexes.outs;
 
-    const result = TxOutputs.encode(hex2buffer(tx.raw.outs));
+    const result = TxOutputs.encode(hex2buffer(tx.raw.outputs));
     expect(buffer2hex(result)).toEqual(testHex);
   });
 
@@ -60,8 +61,8 @@ const testAll = (index: number) => {
     expect(result).toEqual(tx.raw.version);
   });
 
-  tx.raw.ins.forEach((txInput, i) => {
-    test("decode data[" + index + "].ins[" + i + "] ", () => {
+  tx.raw.inputs.forEach((txInput, i) => {
+    test("decode data[" + index + "].inputs[" + i + "] ", () => {
       const testHex = hexes.in[i];
 
       const result = TxInput.decode(hex2buffer(testHex));
@@ -69,8 +70,8 @@ const testAll = (index: number) => {
     });
   });
 
-  tx.raw.outs.forEach((txOutput, i) => {
-    test("decode data[" + index + "].outs[" + i + "]", () => {
+  tx.raw.outputs.forEach((txOutput, i) => {
+    test("decode data[" + index + "].outputs[" + i + "]", () => {
       const testHex = hexes.out[i];
 
       const result = TxOutput.decode(hex2buffer(testHex));
@@ -78,18 +79,18 @@ const testAll = (index: number) => {
     });
   });
 
-  test("decode data[" + index + "].ins", () => {
+  test("decode data[" + index + "].inputs", () => {
     const testHex = hexes.ins;
 
     const result = TxInputs.decode(hex2buffer(testHex));
-    expect(result).toEqual(tx.raw.ins);
+    expect(result).toEqual(tx.raw.inputs);
   });
 
-  test("decode data[" + index + "].outs", () => {
+  test("decode data[" + index + "].outputs", () => {
     const testHex = hexes.outs;
 
     const result = TxOutputs.decode(hex2buffer(testHex));
-    expect(result).toEqual(tx.raw.outs);
+    expect(result).toEqual(tx.raw.outputs);
   });
 
   test("decode data[" + index + "].locktime", () => {
