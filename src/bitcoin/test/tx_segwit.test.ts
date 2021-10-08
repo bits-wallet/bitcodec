@@ -1,5 +1,5 @@
-import { buffer2hex, hex2buffer } from "../../btc/helper";
-import { TxWitnessBase } from "../../btc/someCodecs";
+import { buffer2hex, hex2buffer } from "../helper";
+import { TxWitnessBase } from "../someCodecs";
 import { toTxSegwit, toTxSegwitBase } from "../converter";
 import { TxSegwitBase } from "../models/TxSegwitBase";
 import { TxSegwitParsed } from "../models/TxSegwitParsed";

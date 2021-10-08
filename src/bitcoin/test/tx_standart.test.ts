@@ -1,5 +1,5 @@
-import { buffer2hex, hex2buffer } from "../../btc/helper";
-import { Tx } from "../../btc/someCodecs";
+import { buffer2hex, hex2buffer } from "../helper";
+import { Tx } from "../someCodecs";
 import { datas } from "./data/tx_standart";
 
 datas.forEach((data, index) => {
