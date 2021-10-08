@@ -1,5 +1,3 @@
-import bitcodec from "../index";
-
 export function buffer2hex(obj: any) {
   if (Array.isArray(obj)) obj = obj.map(buffer2hex);
 

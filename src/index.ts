@@ -14,9 +14,6 @@ import { CVarBuffer } from "./lib/CVarBuffer";
 import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
 
-// import { TxCodec } from "./btc/TxCodec";
-import { WitnessLocktimeCodec } from "./btc/WitnessLocktimeCodec";
-
 export default {
   AllBuffer: new CAllBuffer(),
   Array: (length: number, anyCodec: IBitcodec<any>) => new CArray(length, anyCodec),
@@ -48,8 +45,4 @@ export default {
   VarBuffer: (anyCodec: IBitcodec<any>) => new CVarBuffer(anyCodec),
   VarString: (anyCodec: IBitcodec<any>, encodingType: EncodingType = "utf8") => new CVarString(anyCodec, encodingType),
   VarUIntBitcoin: new CVarUIntBitcoin(),
-};
-
-export const btc = {
-  WitnessLocktimeCodec: (inputsCount: number) => new WitnessLocktimeCodec(inputsCount),
 };

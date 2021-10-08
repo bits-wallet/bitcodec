@@ -28,7 +28,7 @@ export const TxWitnessBase = bitcodec.Object([
   { name: "outputs", type: TxOutputs },
   { name: "witness_locktime", type: bitcodec.AllBuffer },
 ]);
-export const TxWitness = bitcodec.Object([
+/* export const TxWitness = bitcodec.Object([
   { name: "version", type: TxVersion },
   { name: "marker", type: bitcodec.Byte },
   { name: "flag", type: bitcodec.Byte },
@@ -36,6 +36,6 @@ export const TxWitness = bitcodec.Object([
   { name: "outputs", type: TxOutputs },
   { name: "witness", type: bitcodec.Buffer(324) },
   { name: "locktime", type: TxLocktime },
-]);
+]); */
 
 // export const WitnessData = bitcodec.VarArray(bitcodec.VarUIntBitcoin, bitcodec.VarArray(bitcodec.VarUIntBitcoin, bitcodec.VarBuffer(bitcodec.VarUIntBitcoin)));

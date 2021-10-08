@@ -1,9 +1,9 @@
-import { btc } from "../../";
 import { buffer2hex, hex2buffer } from "../../btc/helper";
 import { TxWitnessBase } from "../../btc/someCodecs";
 import { toTxSegwit, toTxSegwitBase } from "../converter";
 import { TxSegwitBase } from "../models/TxSegwitBase";
 import { TxSegwitParsed } from "../models/TxSegwitParsed";
+import { WitnessLocktimeCodec } from "../WitnessLocktimeCodec";
 import { datas } from "./data/tx_segwit";
 
 datas.forEach((data, index) => {
@@ -14,7 +14,7 @@ datas.forEach((data, index) => {
     const txWitnessBaseBuffer = TxWitnessBase.decode(hex2buffer(txHex));
     const txWitnessBase = buffer2hex(txWitnessBaseBuffer);
 
-    const witnessLocktimeCodec = btc.WitnessLocktimeCodec(txWitnessBase.inputs.length);
+    const witnessLocktimeCodec = new WitnessLocktimeCodec(txWitnessBase.inputs.length);
     const witnessLocktimeDataBuffer = witnessLocktimeCodec.decode(hex2buffer(txWitnessBase.witness_locktime));
     const witnessLocktimeData = buffer2hex(witnessLocktimeDataBuffer);
 
@@ -35,7 +35,7 @@ datas.forEach((data, index) => {
     const txHex = data.hex;
     const txRaw = data.raw;
 
-    const witnessLocktimeCodec = btc.WitnessLocktimeCodec(txRaw.inputs.length);
+    const witnessLocktimeCodec = new WitnessLocktimeCodec(txRaw.inputs.length);
     const witnessArray = txRaw.inputs.map((input) => input.witness);
     const witnessLocktimeHexBuffer = witnessLocktimeCodec.encode(hex2buffer({ witness: witnessArray, locktime: txRaw.locktime }));
     const witnessLocktimeHex = buffer2hex(witnessLocktimeHexBuffer);
