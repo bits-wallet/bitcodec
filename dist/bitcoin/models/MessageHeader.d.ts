@@ -3,4 +3,5 @@ export declare type MessageHeader = {
     commandName: string;
     payloadSize: number;
     checksum: string;
+    payload: string;
 };

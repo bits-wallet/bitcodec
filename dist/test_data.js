@@ -47,12 +47,13 @@ const data = {
   },
 
   messageHeader: {
-    hex: "f9beb4d976657273696f6e000000000066000000df7d29e6",
+    hex: "f9beb4d96164647200000000000000001f0000000c30bcb501597a6461090400000000000000000000000000000000ffff9eb572c4208d",
     raw: {
       startString: 3652501241,
-      commandName: "version",
-      payloadSize: 102,
-      checksum: "df7d29e6",
+      commandName: "addr",
+      payloadSize: 31,
+      checksum: "0c30bcb5",
+      payload: "01597a6461090400000000000000000000000000000000ffff9eb572c4208d",
     },
   },
 };
