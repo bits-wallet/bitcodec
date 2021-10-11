@@ -2,10 +2,10 @@ import bitcodec from "../";
 import { IBitcodec } from "../models/IBitcodec";
 import { buffer2hex, hex2buffer } from "./helper";
 
-export class WitnessLocktimeCodec implements IBitcodec<{ witness: string[][]; locktime: number }> {
+export class WitnessLocktimeCodec implements IBitcodec<{ witnessScriptsArray: string[][]; lockTime: number }> {
   private witnessLocktimeData = bitcodec.Object([
-    ["witness", bitcodec.VarArray(bitcodec.VarUIntBitcoin, bitcodec.VarArray(bitcodec.VarUIntBitcoin, bitcodec.VarBuffer(bitcodec.VarUIntBitcoin)))],
-    ["locktime", bitcodec.Number.UInt32LE],
+    ["witnessScriptsArray", bitcodec.VarArray(bitcodec.VarUIntBitcoin, bitcodec.VarArray(bitcodec.VarUIntBitcoin, bitcodec.VarBuffer(bitcodec.VarUIntBitcoin)))],
+    ["lockTime", bitcodec.Number.UInt32LE],
   ]);
   private inputsCount;
 
@@ -30,7 +30,7 @@ export class WitnessLocktimeCodec implements IBitcodec<{ witness: string[][]; lo
     return result;
   };
 
-  decode = (buffer: Buffer, offset?: number | undefined, end?: number | undefined): { witness: string[][]; locktime: number } => {
+  decode = (buffer: Buffer, offset?: number | undefined, end?: number | undefined): { witnessScriptsArray: string[][]; lockTime: number } => {
     const inputCountHex = this.inputsCount.toString(16).padStart(2, "0");
     const bufferHex = buffer2hex(buffer);
     const newBuffer = hex2buffer(inputCountHex + bufferHex);
@@ -40,6 +40,6 @@ export class WitnessLocktimeCodec implements IBitcodec<{ witness: string[][]; lo
     this.decodeBytes = this.witnessLocktimeData.decodeBytes;
     this.encodingLength = this.witnessLocktimeData.encodingLength;
 
-    return result as { witness: string[][]; locktime: number };
+    return result as { witnessScriptsArray: string[][]; lockTime: number };
   };
 }

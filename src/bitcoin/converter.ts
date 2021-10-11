@@ -7,17 +7,16 @@ export const toTxSegwit = (txSegwitParsed: TxSegwitParsed): TxSegwit => {
     version: txSegwitParsed.version,
     marker: txSegwitParsed.marker,
     flag: txSegwitParsed.flag,
-    inputs: [],
-    outputs: txSegwitParsed.outputs,
-    locktime: txSegwitParsed.locktime,
+    txIn: [],
+    txOut: txSegwitParsed.txOut,
+    lockTime: txSegwitParsed.lockTime,
   };
 
-  txSegwitParsed.inputs.forEach((input, index) => {
-    txSegwit.inputs.push({
-      hash: input.hash,
-      index: input.index,
-      script: input.script,
-      witness: txSegwitParsed.witness[index],
+  txSegwitParsed.txIn.forEach((input, index) => {
+    txSegwit.txIn.push({
+      previousOutput: input.previousOutput,
+      signatureScript: input.signatureScript,
+      witnessScripts: txSegwitParsed.witnessScriptsArray[index],
       sequence: input.sequence,
     });
   });
@@ -30,21 +29,20 @@ export const toTxSegwitParsed = (txSegwit: TxSegwit): TxSegwitParsed => {
     version: txSegwit.version,
     marker: txSegwit.marker,
     flag: txSegwit.flag,
-    inputs: [],
-    outputs: txSegwit.outputs,
-    witness: [],
-    locktime: txSegwit.locktime,
+    txIn: [],
+    txOut: txSegwit.txOut,
+    witnessScriptsArray: [],
+    lockTime: txSegwit.lockTime,
   };
 
-  txSegwit.inputs.forEach((input, index) => {
-    txSegwitParsed.inputs.push({
-      hash: input.hash,
-      index: input.index,
-      script: input.script,
+  txSegwit.txIn.forEach((input, index) => {
+    txSegwitParsed.txIn.push({
+      previousOutput: input.previousOutput,
+      signatureScript: input.signatureScript,
       sequence: input.sequence,
     });
 
-    txSegwitParsed.witness.push(txSegwitParsed.witness[index]);
+    txSegwitParsed.witnessScriptsArray.push(input.witnessScripts);
   });
 
   return txSegwitParsed;
@@ -55,16 +53,16 @@ export const toTxSegwitBase = (txSegwit: TxSegwit, witnessLocktimeHex: string): 
     version: txSegwit.version,
     marker: txSegwit.marker,
     flag: txSegwit.flag,
-    inputs: [],
-    outputs: txSegwit.outputs,
-    witness_locktime: witnessLocktimeHex,
+    txIn: [],
+    txOut: txSegwit.txOut,
+    witnessScripts_lockTime: witnessLocktimeHex,
+    lockTime: txSegwit.lockTime,
   };
 
-  txSegwit.inputs.forEach((input, index) => {
-    txSegwitBase.inputs.push({
-      hash: input.hash,
-      index: input.index,
-      script: input.script,
+  txSegwit.txIn.forEach((input, index) => {
+    txSegwitBase.txIn.push({
+      previousOutput: input.previousOutput,
+      signatureScript: input.signatureScript,
       sequence: input.sequence,
     });
   });

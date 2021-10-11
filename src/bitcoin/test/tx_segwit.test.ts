@@ -12,21 +12,22 @@ datas.forEach((data, index) => {
     const txRaw = data.raw;
 
     const txWitnessBaseBuffer = TxWitnessBase.decode(hex2buffer(txHex));
-    const txWitnessBase = buffer2hex(txWitnessBaseBuffer);
+    const txWitnessBase = buffer2hex(txWitnessBaseBuffer) as TxSegwitBase;
 
-    const witnessLocktimeCodec = new WitnessLocktimeCodec(txWitnessBase.inputs.length);
-    const witnessLocktimeDataBuffer = witnessLocktimeCodec.decode(hex2buffer(txWitnessBase.witness_locktime));
-    const witnessLocktimeData = buffer2hex(witnessLocktimeDataBuffer);
+    const witnessLocktimeCodec = new WitnessLocktimeCodec(txWitnessBase.txIn.length);
+    const witnessLocktimeDataBuffer: { witnessScriptsArray: string[][]; lockTime: number } = witnessLocktimeCodec.decode(hex2buffer(txWitnessBase.witnessScripts_lockTime));
+    const witnessLocktimeData = buffer2hex(witnessLocktimeDataBuffer) as { witnessScriptsArray: string[][]; lockTime: number };
 
     const txSegwitParsed: TxSegwitParsed = {
       version: txWitnessBase.version,
       marker: txWitnessBase.marker,
       flag: txWitnessBase.flag,
-      inputs: txWitnessBase.inputs,
-      outputs: txWitnessBase.outputs,
-      witness: witnessLocktimeData.witness,
-      locktime: witnessLocktimeData.locktime,
+      txIn: txWitnessBase.txIn,
+      txOut: txWitnessBase.txOut,
+      witnessScriptsArray: witnessLocktimeData.witnessScriptsArray,
+      lockTime: witnessLocktimeData.lockTime,
     };
+
     const txSegwit = toTxSegwit(txSegwitParsed);
     expect(txSegwit).toEqual(txRaw);
   });
@@ -35,14 +36,17 @@ datas.forEach((data, index) => {
     const txHex = data.hex;
     const txRaw = data.raw;
 
-    const witnessLocktimeCodec = new WitnessLocktimeCodec(txRaw.inputs.length);
-    const witnessArray = txRaw.inputs.map((input) => input.witness);
-    const witnessLocktimeHexBuffer = witnessLocktimeCodec.encode(hex2buffer({ witness: witnessArray, locktime: txRaw.locktime }));
-    const witnessLocktimeHex = buffer2hex(witnessLocktimeHexBuffer);
+    const witnessLocktimeCodec = new WitnessLocktimeCodec(txRaw.txIn.length);
+    const witnessArray = txRaw.txIn.map((input) => input.witnessScripts);
+    const witnessLocktimeHexBuffer = witnessLocktimeCodec.encode(
+      hex2buffer({ witnessScriptsArray: witnessArray, lockTime: txRaw.lockTime } as { witnessScriptsArray: string[][]; lockTime: number })
+    );
+    const witnessLocktimeHex = buffer2hex(witnessLocktimeHexBuffer) as string;
 
     const txSegwitBase: TxSegwitBase = toTxSegwitBase(txRaw, witnessLocktimeHex);
     const txWitnessBuffer = TxWitnessBase.encode(hex2buffer(txSegwitBase));
     const txWitnessHex = buffer2hex(txWitnessBuffer);
+    // console.log("txWitnessHex", txWitnessHex);
     expect(txWitnessHex).toEqual(txHex);
   });
 });

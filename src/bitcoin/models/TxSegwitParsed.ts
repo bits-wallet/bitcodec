@@ -1,17 +1,10 @@
-export type TxSegwitParsed = {
-  version: number;
+import { TxStandart } from "./TxStandart";
+
+export interface TxSegwitParsed extends TxStandart {
+  // segwit
   marker: number;
+  // segwit
   flag: number;
-  inputs: {
-    hash: string;
-    index: number;
-    script: string;
-    sequence: number;
-  }[];
-  outputs: {
-    value: number;
-    script: string;
-  }[];
-  witness: string[][];
-  locktime: number;
-};
+  // helps witness length with txIn count
+  witnessScriptsArray: string[][];
+}

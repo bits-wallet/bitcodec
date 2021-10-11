@@ -1,30 +1,33 @@
 import bitcodec from "../";
 
-const TxVersion = bitcodec.Number.UInt32LE; // int32_t
-const TxInput = bitcodec.Object([
+const txVersion = bitcodec.Number.UInt32LE; // int32_t
+const txInItemPreviousOutput = bitcodec.Object([
   { name: "hash", type: bitcodec.Buffer(32) },
   { name: "index", type: bitcodec.Number.UInt32LE },
-  { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
+]);
+const txInItem = bitcodec.Object([
+  { name: "previousOutput", type: txInItemPreviousOutput },
+  { name: "signatureScript", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
   { name: "sequence", type: bitcodec.Number.UInt32LE }, // uint32_t
 ]);
-const TxInputs = bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxInput);
-const TxOutput = bitcodec.Object([
+const txIn = bitcodec.VarArray(bitcodec.VarUIntBitcoin, txInItem);
+const txOutItem = bitcodec.Object([
   { name: "value", type: bitcodec.Number.UInt64LE }, // int64_t
-  { name: "script", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
+  { name: "pkScript", type: bitcodec.VarBuffer(bitcodec.VarUIntBitcoin) },
 ]);
-const TxOutputs = bitcodec.VarArray(bitcodec.VarUIntBitcoin, TxOutput);
-const TxLocktime = bitcodec.Number.UInt32LE; // uint32_t
+const txOut = bitcodec.VarArray(bitcodec.VarUIntBitcoin, txOutItem);
+const txLockTime = bitcodec.Number.UInt32LE; // uint32_t
 export const Tx = bitcodec.Object([
-  { name: "version", type: TxVersion },
-  { name: "inputs", type: TxInputs }, // compactSize uint
-  { name: "outputs", type: TxOutputs }, // compactSize uint
-  { name: "locktime", type: TxLocktime },
+  { name: "version", type: txVersion },
+  { name: "txIn", type: txIn }, // compactSize uint
+  { name: "txOut", type: txOut }, // compactSize uint
+  { name: "lockTime", type: txLockTime },
 ]);
 export const TxWitnessBase = bitcodec.Object([
-  { name: "version", type: TxVersion },
+  { name: "version", type: txVersion },
   { name: "marker", type: bitcodec.Byte },
   { name: "flag", type: bitcodec.Byte },
-  { name: "inputs", type: TxInputs },
-  { name: "outputs", type: TxOutputs },
-  { name: "witness_locktime", type: bitcodec.AllBuffer },
+  { name: "txIn", type: txIn },
+  { name: "txOut", type: txOut },
+  { name: "witnessScripts_lockTime", type: bitcodec.AllBuffer() },
 ]);

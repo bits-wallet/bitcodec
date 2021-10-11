@@ -1,16 +1,10 @@
-export type TxSegwitBase = {
-  version: number;
+import { TxStandart } from "./TxStandart";
+
+export interface TxSegwitBase extends TxStandart {
+  // segwit
   marker: number;
+  // segwit
   flag: number;
-  inputs: {
-    hash: string;
-    index: number;
-    script: string;
-    sequence: number;
-  }[];
-  outputs: {
-    value: number;
-    script: string;
-  }[];
-  witness_locktime: string;
-};
+  // helps witness length with txIn count
+  witnessScripts_lockTime: string;
+}
