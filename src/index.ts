@@ -15,7 +15,7 @@ import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
 
 export default {
-  AllBuffer: () => new CAllBuffer(),
+  AllBuffer: new CAllBuffer(),
   Array: (length: number, anyCodec: IBitcodec<any>) => new CArray(length, anyCodec),
   Buffer: (length: number) => new CBuffer(length),
   Byte: new CNumber(NumberTypes.UInt8, 1),

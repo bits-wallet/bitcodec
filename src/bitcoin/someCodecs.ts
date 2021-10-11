@@ -29,5 +29,5 @@ export const TxWitnessBase = bitcodec.Object([
   { name: "flag", type: bitcodec.Byte },
   { name: "txIn", type: txIn },
   { name: "txOut", type: txOut },
-  { name: "witnessScripts_lockTime", type: bitcodec.AllBuffer() },
+  { name: "witnessScripts_lockTime", type: bitcodec.AllBuffer },
 ]);
