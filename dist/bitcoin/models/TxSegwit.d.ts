@@ -1,17 +1,20 @@
-export declare type TxSegwit = {
-    version: number;
+import { StartString } from "./StartString";
+export interface TxSegwit {
+    version: StartString;
     marker: number;
     flag: number;
-    inputs: {
-        hash: string;
-        index: number;
-        script: string;
-        witness: string[];
+    txIn: {
+        previousOutput: {
+            hash: string;
+            index: number;
+        };
+        signatureScript: string;
+        witnessScripts: string[];
         sequence: number;
     }[];
-    outputs: {
+    txOut: {
         value: number;
-        script: string;
+        pkScript: string;
     }[];
-    locktime: number;
-};
+    lockTime: number;
+}

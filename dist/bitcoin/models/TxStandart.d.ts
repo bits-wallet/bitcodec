@@ -1,14 +1,17 @@
-export declare type TxStandart = {
-    version: number;
-    inputs: {
-        hash: string;
-        index: number;
-        script: string;
+import { StartString } from "./StartString";
+export interface TxStandart {
+    version: StartString;
+    txIn: {
+        previousOutput: {
+            hash: string;
+            index: number;
+        };
+        signatureScript: string;
         sequence: number;
     }[];
-    outputs: {
+    txOut: {
         value: number;
-        script: string;
+        pkScript: string;
     }[];
-    locktime: number;
-};
+    lockTime: number;
+}
