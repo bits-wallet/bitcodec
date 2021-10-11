@@ -26,6 +26,7 @@ module.exports = (env) => {
       extensions: [".ts", ".js", ".d.ts"],
       fallback: {
         buffer: require.resolve("buffer"),
+        os: require.resolve("os-browserify/browser"),
       },
     },
     plugins: [
