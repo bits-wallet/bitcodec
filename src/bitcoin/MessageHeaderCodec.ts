@@ -16,9 +16,6 @@ export const MessageHeaderCodec = {
   },
 
   encode: (obj: any) => {
-    console.log("obj", obj);
-    console.log("obj-buffer", hex2buffer(obj));
-
     return buffer2hex(_MessageHeaderCodec.encode(hex2buffer(obj)));
   },
 };
