@@ -9,6 +9,6 @@ datas.forEach((data, index) => {
 
   test("message_0 encode index:" + index, () => {
     const result = bitcoin.HeaderCodec.encode(data.raw);
-    expect(result).toEqual(data.hex.substr(0, 48));
+    expect(result).toEqual(data.hex);
   });
 });

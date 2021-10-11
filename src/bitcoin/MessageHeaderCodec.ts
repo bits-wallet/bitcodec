@@ -9,6 +9,7 @@ const _MessageHeaderCodec = bitcodec.Object([
   ["commandName", new MessageCommandCodec()],
   ["payloadSize", bitcodec.Number.UInt32LE],
   ["checksum", bitcodec.Buffer(4)],
+  ["payload", bitcodec.AllBuffer],
 ]);
 
 export const MessageHeaderCodec = {
