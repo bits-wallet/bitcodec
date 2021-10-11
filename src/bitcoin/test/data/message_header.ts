@@ -12,6 +12,7 @@ export const datas: MessageHeaderData[] = [
       commandName: "ping",
       payloadSize: 8,
       checksum: "07fb26b6",
+      payload: "ed9801961797a5f1",
     },
   },
   {
@@ -21,6 +22,7 @@ export const datas: MessageHeaderData[] = [
       commandName: "pong",
       payloadSize: 8,
       checksum: "72642448",
+      payload: "15569dfaed442652",
     },
   },
   {
@@ -30,6 +32,7 @@ export const datas: MessageHeaderData[] = [
       commandName: "version",
       payloadSize: 102,
       checksum: "df7d29e6",
+      payload: "",
     },
   },
   {
@@ -39,6 +42,8 @@ export const datas: MessageHeaderData[] = [
       commandName: "version",
       payloadSize: 102,
       checksum: "97302af5",
+      payload:
+        "801101000904000000000000e577646100000000000000000000000000000000000000000000ffff1fdf0364085e090400000000000000000000000000000000000000000000000072036dbc6d407f7f102f5361746f7368693a32322e302e302f26c00a0001",
     },
   },
   {
@@ -48,6 +53,7 @@ export const datas: MessageHeaderData[] = [
       commandName: "verack",
       payloadSize: 0,
       checksum: "5df6e0e2",
+      payload: "",
     },
   },
   {
@@ -57,6 +63,8 @@ export const datas: MessageHeaderData[] = [
       commandName: "alert",
       payloadSize: 168,
       checksum: "1bf9aaea",
+      payload:
+        "60010000000000000000000000ffffff7f00000000ffffff7ffeffff7f01ffffff7f00000000ffffff7f00ffffff7f002f555247454e543a20416c657274206b657920636f6d70726f6d697365642c2075706772616465207265717569726564004630440220653febd6410f470f6bae11cad19c48413becb1ac2c17f908fd0fd53bdc3abd5202206d0e9c96fe88d4a0f01ed9dedae2b6f9e00da94cad0fecaae66ecf689bf71b50",
     },
   },
   {
@@ -66,6 +74,7 @@ export const datas: MessageHeaderData[] = [
       commandName: "addr",
       payloadSize: 31,
       checksum: "0c30bcb5",
+      payload: "01597a6461090400000000000000000000000000000000ffff9eb572c4208d",
     },
   },
   {
@@ -75,6 +84,7 @@ export const datas: MessageHeaderData[] = [
       commandName: "sendheaders",
       payloadSize: 0,
       checksum: "5df6e0e2",
+      payload: "",
     },
   },
 ];
