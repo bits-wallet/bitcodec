@@ -1,2 +1,6 @@
 import { TxCodec } from "./bitcoin/TxCodec";
-export { TxCodec };
+declare const HeaderCodec: {
+    decode: (hex: string) => any;
+    encode: (obj: any) => any;
+};
+export { HeaderCodec, TxCodec, };
