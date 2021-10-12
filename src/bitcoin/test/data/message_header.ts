@@ -2,7 +2,7 @@ import { MessageHeader } from "../../models/MessageHeader";
 
 type MessageHeaderData = {
   hex: string;
-  raw: MessageHeader;
+  raw: MessageHeader<string>;
 };
 export const datas: MessageHeaderData[] = [
   {

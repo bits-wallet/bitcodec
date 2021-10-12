@@ -1,5 +1,4 @@
 import bitcodec from "../";
-import * as bitcoin from "../bitcoin";
 import { buffer2hex, hex2buffer } from "../bitcoin/helper";
 import { MessageCommandCodec } from "./MessageCommandCodec";
 import { MessageHeader } from "./models/MessageHeader";
@@ -13,11 +12,11 @@ const _MessageHeaderCodec = bitcodec.Object([
 ]);
 
 export const MessageHeaderCodec = {
-  decode: (hex: string): MessageHeader => {
+  decode: (hex: string): MessageHeader<string> => {
     return buffer2hex(_MessageHeaderCodec.decode(hex2buffer(hex)));
   },
 
-  encode: (obj: MessageHeader): string => {
+  encode: (obj: MessageHeader<string>): string => {
     return buffer2hex(_MessageHeaderCodec.encode(hex2buffer(obj)));
   },
 };
