@@ -4,10 +4,10 @@ import { BlockHeaders } from "./models/BlockHeaders";
 
 const blockHeader = bitcodec.Object([
   ["version", bitcodec.Number.Int32LE],
-  ["prevHash", bitcodec.Buffer(32)],
-  ["merkleRoot", bitcodec.Buffer(32)],
-  ["timestamp", bitcodec.Number.UInt32LE],
-  ["bits", bitcodec.Number.UInt32LE],
+  ["previousBlockHeaderHash", bitcodec.Buffer(32)],
+  ["merkleRootHash", bitcodec.Buffer(32)],
+  ["time", bitcodec.Number.UInt32LE],
+  ["nBits", bitcodec.Number.UInt32LE],
   ["nonce", bitcodec.Number.UInt32LE],
 ]);
 
