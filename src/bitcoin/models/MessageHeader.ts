@@ -1,8 +1,8 @@
 // https://developer.bitcoin.org/reference/p2p_networking.html#message-headers
-export type MessageHeader = {
+export interface MessageHeader<T> {
   startString: number;
   commandName: string;
   payloadSize: number;
   checksum: string;
-  payload: string;
-};
+  payload: T;
+}
