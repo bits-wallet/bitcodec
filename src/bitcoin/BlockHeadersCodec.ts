@@ -10,16 +10,4 @@ const blockHeader = bitcodec.Object([
   ["txnCount", bitcodec.Number.UInt8],
 ]);
 
-const blockHeaderObject = bitcodec.Object([{ name: "headers", type: blockHeader }]);
-
-export const BlockHeadersCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, blockHeaderObject);
-
-// export const BlockMessageStructureCodec = {
-//   decode: (hex: string): BlockHeader => {
-//     return buffer2hex(_BlockMessageStructureCodec.decode(hex2buffer(hex)));
-//   },
-
-//   encode: (obj: BlockHeader): string => {
-//     return buffer2hex(_BlockMessageStructureCodec.encode(hex2buffer(obj)));
-//   },
-// };
+export const BlockHeadersCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, blockHeader);
