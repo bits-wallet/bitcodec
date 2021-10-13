@@ -31,3 +31,12 @@ export const TxWitnessBase = bitcodec.Object([
   { name: "txOut", type: txOut },
   { name: "witnessScripts_lockTime", type: bitcodec.AllBuffer },
 ]);
+
+export const blockHeader = bitcodec.Object([
+  { name: "version", type: bitcodec.Number.UInt32LE }, // uint32_t
+  { name: "previousBlockHeaderHash", type: bitcodec.Buffer(32) },
+  { name: "merkleRootHash", type: bitcodec.Buffer(32) },
+  { name: "time", type: bitcodec.Number.UInt32LE }, // uint32_t
+  { name: "nBits", type: bitcodec.Number.UInt32LE }, // uint32_t
+  { name: "nonce", type: bitcodec.Number.UInt32LE }, // uint32_t
+]);
