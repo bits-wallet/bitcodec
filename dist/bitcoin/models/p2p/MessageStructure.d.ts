@@ -1,5 +1,6 @@
+import { MAGIC } from "./MAGIC";
 export interface MessageStructure<T> {
-    magic: number;
+    magic: MAGIC;
     command: string;
     length: number;
     checksum: string;

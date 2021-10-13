@@ -1,20 +1,16 @@
 /// <reference types="node" />
 import { MessageStructure } from "./MessageStructure";
-declare type Addr = {
-  services: Buffer;
-  iPAddress: string;
-  port: number;
-};
+import { NetworkAddressVersion } from "./NetworkAddress";
 export declare type Version = {
-  version: number;
-  services: Buffer;
-  timestamp: number;
-  addrRecv: Addr;
-  addrFrom: Addr;
-  nonce: Buffer;
-  userAgent: string;
-  startHeight: number;
-  relay: boolean;
+    version: number;
+    services: Buffer;
+    timestamp: number;
+    addrRecv: NetworkAddressVersion;
+    addrFrom: NetworkAddressVersion;
+    nonce: Buffer;
+    userAgent: string;
+    startHeight: number;
+    relay: boolean;
 };
-export interface VersionMessage extends MessageStructure<Version> {}
-export {};
+export interface VersionMessage extends MessageStructure<Version> {
+}

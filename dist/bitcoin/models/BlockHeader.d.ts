@@ -1,8 +1,9 @@
 export declare type BlockHeader = {
     version: number;
-    previousBlockHeaderHash: string;
-    merkleRootHash: string;
-    time: number;
-    nBits: number;
+    prevBlock: string;
+    merkleRoot: string;
+    timestamp: number;
+    bits: number;
     nonce: number;
+    txnCount: number;
 };

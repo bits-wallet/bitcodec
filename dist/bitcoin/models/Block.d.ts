@@ -1,6 +1,5 @@
 import { BlockHeader } from "./BlockHeader";
 import { TxStandart, TxSegwit } from "./Tx";
-export declare type Block = {
-    blockHeader: BlockHeader;
+export interface Block extends BlockHeader {
     txns: TxStandart[] | TxSegwit[];
-};
+}
