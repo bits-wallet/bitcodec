@@ -1,9 +1,10 @@
-// https://developer.bitcoin.org/reference/block_chain.html#block-headers
+// https://en.bitcoin.it/wiki/Protocol_documentation#Block_Headers
 export type BlockHeader = {
   version: number;
-  previousBlockHeaderHash: string;
-  merkleRootHash: string;
-  time: number;
-  nBits: number;
+  prevBlock: string;
+  merkleRoot: string;
+  timestamp: number;
+  bits: number;
   nonce: number;
+  txnCount: number;
 };
