@@ -1,9 +1,7 @@
-// https://developer.bitcoin.org/reference/transactions.html#raw-transaction-format
+// https://en.bitcoin.it/wiki/Protocol_documentation#tx
 export interface TxStandart {
   version: number;
-  // https://developer.bitcoin.org/reference/transactions.html#txin-a-transaction-input-non-coinbase
   txIn: {
-    // https://developer.bitcoin.org/reference/transactions.html#outpoint-the-specific-part-of-a-specific-output
     previousOutput: {
       hash: string;
       index: number;
@@ -11,7 +9,6 @@ export interface TxStandart {
     signatureScript: string;
     sequence: number;
   }[];
-  // https://developer.bitcoin.org/reference/transactions.html#txout-a-transaction-output
   txOut: {
     value: number;
     pkScript: string;
@@ -25,9 +22,7 @@ export interface TxSegwit {
   marker: number;
   // segwit
   flag: number;
-  // https://developer.bitcoin.org/reference/transactions.html#txin-a-transaction-input-non-coinbase
   txIn: {
-    // https://developer.bitcoin.org/reference/transactions.html#outpoint-the-specific-part-of-a-specific-output
     previousOutput: {
       hash: string;
       index: number;
@@ -37,7 +32,6 @@ export interface TxSegwit {
     witnessScripts: string[];
     sequence: number;
   }[];
-  // https://developer.bitcoin.org/reference/transactions.html#txout-a-transaction-output
   txOut: {
     value: number;
     pkScript: string;
