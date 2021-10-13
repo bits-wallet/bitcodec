@@ -1,6 +1,6 @@
 import { MessageStructure } from "./MessageStructure";
 
-// https://developer.bitcoin.org/reference/p2p_networking.html#ping
+// https://en.bitcoin.it/wiki/Protocol_documentation#ping
 export type PingPongPayload = {
   nonce: Buffer;
 };
