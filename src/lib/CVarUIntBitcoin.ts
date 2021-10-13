@@ -1,5 +1,6 @@
 import { IBitcodec } from "../models/IBitcodec";
 
+// https://en.bitcoin.it/wiki/Protocol_documentation#Variable_length_integer
 export class CVarUIntBitcoin implements IBitcodec<number> {
   private MAX_SAFE_INTEGER: number = 9007199254740991;
 
