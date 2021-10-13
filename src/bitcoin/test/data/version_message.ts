@@ -22,7 +22,7 @@ export const datas: VersionMessageData[] = [
           iPAddress: "31.223.3.100",
           port: 2142,
         },
-        addrTrans: {
+        addrFrom: {
           services: Buffer.from("0904000000000000", "hex"),
           iPAddress: "::",
           port: 0,

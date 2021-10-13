@@ -1,17 +1,13 @@
 import { MessageStructure } from "./MessageStructure";
+import { NetworkAddressVersion } from "./NetworkAddress";
 
-// https://developer.bitcoin.org/reference/p2p_networking.html#version
-type Addr = {
-  services: Buffer;
-  iPAddress: string;
-  port: number;
-};
+// https://en.bitcoin.it/wiki/Protocol_documentation#version
 export type Version = {
   version: number;
   services: Buffer;
   timestamp: number;
-  addrRecv: Addr;
-  addrTrans: Addr;
+  addrRecv: NetworkAddressVersion;
+  addrFrom: NetworkAddressVersion;
   nonce: Buffer;
   userAgent: string;
   startHeight: number;

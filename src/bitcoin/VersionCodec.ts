@@ -13,7 +13,7 @@ export const VersionCodec = bitcodec.Object([
   ["services", bitcodec.Buffer(8)],
   ["timestamp", bitcodec.Number.UInt64LE],
   ["addrRecv", addr],
-  ["addrTrans", addr],
+  ["addrFrom", addr],
   ["nonce", bitcodec.Buffer(8)],
   ["userAgent", bitcodec.VarString(bitcodec.VarUIntBitcoin, "ascii")],
   ["startHeight", bitcodec.Number.Int32LE],
