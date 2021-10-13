@@ -3,8 +3,9 @@ import { MessageHeaderCodec } from "./bitcoin/MessageHeaderCodec";
 import { VersionCodec } from "./bitcoin/VersionCodec";
 import { TxCodec } from "./bitcoin/TxCodec";
 import { BlockHeaderCodec } from "./bitcoin/BlockHeaderCodec";
+import { BlockCodec } from "./bitcoin/BlockCodec";
 
 // const CommandCodec = new MessageCommandCodec();
 const HeaderCodec = MessageHeaderCodec;
 
-export { BlockHeaderCodec, HeaderCodec, VersionCodec, TxCodec };
+export { BlockCodec, BlockHeaderCodec, HeaderCodec, VersionCodec, TxCodec };
