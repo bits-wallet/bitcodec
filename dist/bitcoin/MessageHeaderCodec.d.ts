@@ -1,5 +1,5 @@
-import { MessageHeader } from "./models/MessageHeader";
+import { MessageHeader } from "./models/p2p/MessageHeader";
 export declare const MessageHeaderCodec: {
-    decode: (hex: string) => MessageHeader;
-    encode: (obj: MessageHeader) => string;
+    decode: (hex: string) => MessageHeader<string>;
+    encode: (obj: MessageHeader<string>) => string;
 };
