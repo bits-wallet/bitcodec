@@ -1,3 +1,4 @@
+import { MAGIC } from "../../models/p2p/MAGIC";
 import { VersionMessage } from "../../models/p2p/Version";
 
 type VersionMessageData = {
@@ -8,7 +9,7 @@ export const datas: VersionMessageData[] = [
   {
     hex: "f9beb4d976657273696f6e00000000006600000097302af5801101000904000000000000e577646100000000000000000000000000000000000000000000ffff1fdf0364085e090400000000000000000000000000000000000000000000000072036dbc6d407f7f102f5361746f7368693a32322e302e302f26c00a0001",
     raw: {
-      magic: 3652501241,
+      magic: MAGIC.Mainnet,
       command: "version",
       length: 102,
       checksum: "97302af5",
