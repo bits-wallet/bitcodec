@@ -6,7 +6,7 @@ type Addr = {
   iPAddress: string;
   port: number;
 };
-export type VersionPayload = {
+export type Version = {
   version: number;
   services: Buffer;
   timestamp: number;
@@ -18,4 +18,4 @@ export type VersionPayload = {
   relay: boolean;
 };
 
-export interface VersionMessage extends MessageHeader<VersionPayload> {}
+export interface VersionMessage extends MessageHeader<Version> {}
