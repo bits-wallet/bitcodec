@@ -1,4 +1,4 @@
-import bitcodec from "..";
+/* import bitcodec from "..";
 import { buffer2hex, hex2buffer } from "./helper";
 import { BlockPayload } from "./models/Block";
 import { blockHeader, Tx } from "./someCodecs";
@@ -18,3 +18,4 @@ export const BlockCodec = {
     return buffer2hex(_BlockCodec.encode(hex2buffer(obj)));
   },
 };
+ */

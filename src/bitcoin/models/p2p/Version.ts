@@ -18,4 +18,4 @@ export type VersionPayload = {
   relay: boolean;
 };
 
-export interface Version extends MessageHeader<VersionPayload> {}
+export interface VersionMessage extends MessageHeader<VersionPayload> {}

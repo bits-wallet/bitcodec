@@ -1,6 +1,6 @@
-import bitcodec from "..";
+/* import bitcodec from "..";
 import { buffer2hex, hex2buffer } from "./helper";
-import { BlockHeaders } from "./models/BlockHeaders";
+import { BlockHeader } from "./models/BlockHeader";
 
 const blockHeader = bitcodec.Object([
   ["version", bitcodec.Number.Int32LE],
@@ -19,11 +19,11 @@ const blockHeaderObject = bitcodec.Object([
 const _BlockHeaderCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, blockHeaderObject);
 
 export const BlockHeaderCodec = {
-  decode: (hex: string): BlockHeaders => {
+  decode: (hex: string): BlockHeader => {
     return buffer2hex(_BlockHeaderCodec.decode(hex2buffer(hex)));
   },
 
-  encode: (obj: BlockHeaders): string => {
+  encode: (obj: BlockHeader): string => {
     return buffer2hex(_BlockHeaderCodec.encode(hex2buffer(obj)));
   },
-};
+}; */

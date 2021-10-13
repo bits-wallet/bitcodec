@@ -1,9 +1,6 @@
 import { toTxSegwit, toTxSegwitBase } from "./converter";
 import { buffer2hex, hex2buffer } from "./helper";
-import { TxSegwit } from "./models/TxSegwit";
-import { TxSegwitBase } from "./models/TxSegwitBase";
-import { TxSegwitParsed } from "./models/TxSegwitParsed";
-import { TxStandart } from "./models/TxStandart";
+import { TxStandart, TxSegwit, TxSegwitBase, TxSegwitParsed } from "./models/Tx";
 
 import { Tx, TxWitnessBase } from "./someCodecs";
 import { WitnessLocktimeCodec } from "./WitnessLocktimeCodec";

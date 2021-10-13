@@ -5,4 +5,4 @@ export type PingPongPayload = {
   nonce: Buffer;
 };
 
-export interface PingPong extends MessageHeader<PingPongPayload> {}
+export interface PingPongMessage extends MessageHeader<PingPongPayload> {}

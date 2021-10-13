@@ -1,7 +1,7 @@
 import bitcodec from "../";
 import { buffer2hex, hex2buffer } from "../bitcoin/helper";
 import { MessageCommandCodec } from "./MessageCommandCodec";
-import { MessageHeader } from "./models/MessageHeader";
+import { MessageHeader } from "./models/p2p/MessageHeader";
 
 const _MessageHeaderCodec = bitcodec.Object([
   ["startString", bitcodec.Number.UInt32LE],

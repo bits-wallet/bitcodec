@@ -1,4 +1,4 @@
-import { TxStandart } from "../../models/TxStandart";
+import { TxStandart } from "../../models/Tx";
 
 type TxStandartData = {
   txid: string;

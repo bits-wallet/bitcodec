@@ -1,4 +1,4 @@
-import { MessageHeader } from "../../models/MessageHeader";
+import { MessageHeader } from "../../models/p2p/MessageHeader";
 
 type MessageHeaderData = {
   hex: string;

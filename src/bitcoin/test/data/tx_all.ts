@@ -1,5 +1,4 @@
-import { TxSegwit } from "../../models/TxSegwit";
-import { TxStandart } from "../../models/TxStandart";
+import { TxStandart, TxSegwit } from "../../models/Tx";
 
 type TxStandartData = {
   txid: string;

@@ -1,6 +1,4 @@
-import { TxSegwit } from "./models/TxSegwit";
-import { TxSegwitBase } from "./models/TxSegwitBase";
-import { TxSegwitParsed } from "./models/TxSegwitParsed";
+import { TxSegwit, TxSegwitBase, TxSegwitParsed } from "./models/Tx";
 
 export const toTxSegwit = (txSegwitParsed: TxSegwitParsed): TxSegwit => {
   const txSegwit: TxSegwit = {
