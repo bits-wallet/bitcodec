@@ -1,17 +1,17 @@
-import { StartString } from "./StartString";
+import { Magic } from "./Magic";
 export interface TxStandart {
-    version: StartString;
-    txIn: {
-        previousOutput: {
-            hash: string;
-            index: number;
-        };
-        signatureScript: string;
-        sequence: number;
-    }[];
-    txOut: {
-        value: number;
-        pkScript: string;
-    }[];
-    lockTime: number;
+  version: Magic;
+  txIn: {
+    previousOutput: {
+      hash: string;
+      index: number;
+    };
+    signatureScript: string;
+    sequence: number;
+  }[];
+  txOut: {
+    value: number;
+    pkScript: string;
+  }[];
+  lockTime: number;
 }

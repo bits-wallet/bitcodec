@@ -1,7 +1,7 @@
-export declare type MessageHeader = {
-    startString: number;
-    commandName: string;
-    payloadSize: number;
-    checksum: string;
-    payload: string;
+export declare type MessageStructure = {
+  magic: number;
+  command: string;
+  length: number;
+  checksum: string;
+  payload: string;
 };

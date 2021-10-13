@@ -6,7 +6,7 @@ test("fake", () => expect(1).toEqual(1));
 
 /* datas.forEach((data, index) => {
   test("block decode index:" + index, () => {
-    const decodedData = bitcoin.HeaderCodec.decode(data.hex);
+    const decodedData = bitcoin.MessageStructureCodec.decode(data.hex);
     const decodedBlockPayload: BlockPayload = bitcoin.BlockCodec.decode(decodedData.payload);
 
     // blockHeader
@@ -30,14 +30,14 @@ test("fake", () => expect(1).toEqual(1));
     const blockPayloadDataHex = bitcoin.BlockCodec.encode(data.raw.payload);
 
     const blockData = {
-      startString: data.raw.startString,
-      commandName: data.raw.commandName,
-      payloadSize: data.raw.payloadSize,
+      magic: data.raw.magic,
+      command: data.raw.command,
+      length: data.raw.length,
       checksum: data.raw.checksum,
       payload: blockPayloadDataHex,
     };
 
-    const result = bitcoin.HeaderCodec.encode(blockData);
+    const result = bitcoin.MessageStructureCodec.encode(blockData);
 
     expect(result).toEqual(data.hex);
   });

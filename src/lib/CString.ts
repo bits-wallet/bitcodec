@@ -2,6 +2,7 @@ import { EncodingType } from "../models/EncodingType";
 import { IBitcodec } from "../models/IBitcodec";
 import { CBuffer } from "./CBuffer";
 
+// https://en.bitcoin.it/wiki/Protocol_documentation#Variable_length_string
 export class CString implements IBitcodec<string> {
   private length: number;
   private bufferCodec: IBitcodec<Buffer>;

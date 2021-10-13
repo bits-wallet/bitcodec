@@ -16,14 +16,14 @@ const blockHeaderObject = bitcodec.Object([
   { name: "count", type: bitcodec.Number.UInt32LE },
 ]);
 
-const _BlockHeaderCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, blockHeaderObject);
+const _BlockMessageStructureCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, blockHeaderObject);
 
-export const BlockHeaderCodec = {
+export const BlockMessageStructureCodec = {
   decode: (hex: string): BlockHeader => {
-    return buffer2hex(_BlockHeaderCodec.decode(hex2buffer(hex)));
+    return buffer2hex(_BlockMessageStructureCodec.decode(hex2buffer(hex)));
   },
 
   encode: (obj: BlockHeader): string => {
-    return buffer2hex(_BlockHeaderCodec.encode(hex2buffer(obj)));
+    return buffer2hex(_BlockMessageStructureCodec.encode(hex2buffer(obj)));
   },
 }; */

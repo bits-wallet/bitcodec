@@ -8,8 +8,8 @@ logMessage = bitcoin.TxCodec.encode(data.tx.raw);
 console.log("TxCodec.encode", logMessage);
 
 // message header
-logMessage = bitcoin.HeaderCodec.decode(data.messageHeader.hex);
-console.log("HeaderCodec.decode", logMessage);
+logMessage = bitcoin.MessageStructureCodec.decode(data.messageStructure.hex);
+console.log("MessageStructureCodec.decode", logMessage);
 
-logMessage = bitcoin.HeaderCodec.encode(data.messageHeader.raw);
-console.log("HeaderCodec.encode", logMessage);
+logMessage = bitcoin.MessageStructureCodec.encode(data.messageStructure.raw);
+console.log("MessageStructureCodec.encode", logMessage);

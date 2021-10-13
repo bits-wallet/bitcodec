@@ -1,7 +1,7 @@
 /// <reference types="node" />
-import { MessageHeader } from "./MessageHeader";
+import { MessageStructure } from "./MessageStructure";
 export declare type PingPongPayload = {
     nonce: Buffer;
 };
-export interface PingPongMessage extends MessageHeader<PingPongPayload> {
+export interface PingPongMessage extends MessageStructure<PingPongPayload> {
 }

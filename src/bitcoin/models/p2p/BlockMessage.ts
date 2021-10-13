@@ -1,4 +1,4 @@
 import { Block } from "../Block";
-import { MessageHeader } from "./MessageHeader";
+import { MessageStructure } from "./MessageStructure";
 
-export interface BlockMessage extends MessageHeader<Block> {}
+export interface BlockMessage extends MessageStructure<Block> {}

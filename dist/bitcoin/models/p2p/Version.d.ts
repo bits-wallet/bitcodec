@@ -1,11 +1,11 @@
 /// <reference types="node" />
-import { MessageHeader } from "./MessageHeader";
+import { MessageStructure } from "./MessageStructure";
 declare type Addr = {
     services: Buffer;
     iPAddress: string;
     port: number;
 };
-export declare type VersionPayload = {
+export declare type Version = {
     version: number;
     services: Buffer;
     timestamp: number;
@@ -16,6 +16,6 @@ export declare type VersionPayload = {
     startHeight: number;
     relay: boolean;
 };
-export interface VersionMessage extends MessageHeader<VersionPayload> {
+export interface VersionMessage extends MessageStructure<Version> {
 }
 export {};

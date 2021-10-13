@@ -1,4 +1,4 @@
-import { MessageHeader } from "./MessageHeader";
+import { MessageStructure } from "./MessageStructure";
 
 // https://developer.bitcoin.org/reference/p2p_networking.html#version
 type Addr = {
@@ -18,4 +18,4 @@ export type Version = {
   relay: boolean;
 };
 
-export interface VersionMessage extends MessageHeader<Version> {}
+export interface VersionMessage extends MessageStructure<Version> {}

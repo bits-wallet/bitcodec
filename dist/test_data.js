@@ -46,12 +46,12 @@ const data = {
     },
   },
 
-  messageHeader: {
+  messageStructure: {
     hex: "f9beb4d96164647200000000000000001f0000000c30bcb501597a6461090400000000000000000000000000000000ffff9eb572c4208d",
     raw: {
-      startString: 3652501241,
-      commandName: "addr",
-      payloadSize: 31,
+      magic: 3652501241,
+      command: "addr",
+      length: 31,
       checksum: "0c30bcb5",
       payload: "01597a6461090400000000000000000000000000000000ffff9eb572c4208d",
     },
