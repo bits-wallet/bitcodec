@@ -1,11 +1,10 @@
 /// <reference types="node" />
-import { IBitcodec } from "../models/IBitcodec";
-export declare class MessageCommandCodec implements IBitcodec<string> {
-    private buffer12;
+import { IBitcodec } from "../../../models/IBitcodec";
+export declare class IpCodec implements IBitcodec<string> {
+    private IPV4_PREFIX;
     encodeBytes: number;
     decodeBytes: number;
-    encodingLength: (t?: string | undefined) => number;
-    constructor();
+    encodingLength: (t?: any) => number;
     encode: (value: string, buffer?: Buffer | undefined, offset?: number | undefined) => Buffer;
     decode: (buffer: Buffer, offset?: number | undefined, end?: number | undefined) => string;
 }
