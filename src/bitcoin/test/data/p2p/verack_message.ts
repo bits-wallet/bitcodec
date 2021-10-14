@@ -1,5 +1,5 @@
-import { MAGIC } from "../../models/p2p/MAGIC";
-import { VerackMessage } from "../../models/p2p/Verack";
+import { MAGIC } from "../../../models/p2p/MAGIC";
+import { VerackMessage } from "../../../models/p2p/Verack";
 
 type VerackMessageData = {
   hex: string;

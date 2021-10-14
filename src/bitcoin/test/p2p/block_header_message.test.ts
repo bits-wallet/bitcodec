@@ -1,8 +1,8 @@
-import * as bitcoin from "../../bitcoin";
-import { buffer2hex, hex2buffer } from "../helper";
-import { BlockHeader } from "../models/BlockHeader";
-import { MessageStructure } from "../models/p2p/MessageStructure";
-import { datas } from "./data/block_header_message";
+import * as bitcoin from "../../../bitcoin";
+import { buffer2hex, hex2buffer } from "../../helper";
+import { BlockHeader } from "../../models/BlockHeader";
+import { MessageStructure } from "../../models/p2p/MessageStructure";
+import { datas } from "../data/p2p/block_header_message";
 
 datas.forEach((data, index) => {
   test("block_header_message decode index:" + index, () => {

@@ -1,5 +1,5 @@
-import { MAGIC } from "../../models/p2p/MAGIC";
-import { MessageStructure } from "../../models/p2p/MessageStructure";
+import { MAGIC } from "../../../models/p2p/MAGIC";
+import { MessageStructure } from "../../../models/p2p/MessageStructure";
 
 type MessageStructureData = {
   hex: string;

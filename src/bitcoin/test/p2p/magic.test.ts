@@ -1,5 +1,5 @@
-import * as bitcoin from "../../bitcoin";
-import { datas } from "./data/magic";
+import * as bitcoin from "../../../bitcoin";
+import { datas } from "../data/p2p/magic";
 
 datas.forEach((data, index) => {
   test("magic decode index:" + index, () => {

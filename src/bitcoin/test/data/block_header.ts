@@ -1,4 +1,3 @@
-import { MAGIC } from "../../models/p2p/MAGIC";
 import { BlockHeader } from "../../models/BlockHeader";
 
 type BlockHeaderData = {

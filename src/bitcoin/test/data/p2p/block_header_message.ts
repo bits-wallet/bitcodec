@@ -1,5 +1,5 @@
-import { MAGIC } from "../../models/p2p/MAGIC";
-import { BlockHeadersMessage } from "../../models/p2p/BlockHeadersMessage";
+import { MAGIC } from "../../../models/p2p/MAGIC";
+import { BlockHeadersMessage } from "../../../models/p2p/BlockHeadersMessage";
 
 type BlockHeadersMessageData = {
   hex: string;

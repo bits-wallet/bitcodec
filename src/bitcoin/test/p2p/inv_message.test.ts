@@ -1,8 +1,8 @@
-import * as bitcoin from "../../bitcoin";
-import { buffer2hex, hex2buffer } from "../helper";
-import { Inventory, InvMessage } from "../models/p2p/Inventory";
-import { MessageStructure } from "../models/p2p/MessageStructure";
-import { datas } from "./data/inv_message";
+import * as bitcoin from "../../../bitcoin";
+import { buffer2hex, hex2buffer } from "../../helper";
+import { Inventory, InvMessage } from "../../models/p2p/Inventory";
+import { MessageStructure } from "../../models/p2p/MessageStructure";
+import { datas } from "../data/p2p/inv_message";
 
 datas.forEach((data, index) => {
   test("inv_message decode index:" + index, () => {

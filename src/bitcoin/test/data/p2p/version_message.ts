@@ -1,5 +1,5 @@
-import { MAGIC } from "../../models/p2p/MAGIC";
-import { VersionMessage } from "../../models/p2p/Version";
+import { MAGIC } from "../../../models/p2p/MAGIC";
+import { VersionMessage } from "../../../models/p2p/Version";
 
 type VersionMessageData = {
   hex: string;
@@ -19,12 +19,12 @@ export const datas: VersionMessageData[] = [
         timestamp: 1633974245,
         addrRecv: {
           services: Buffer.from("0000000000000000", "hex"),
-          iPAddress: "31.223.3.100",
+          ip: "31.223.3.100",
           port: 2142,
         },
         addrFrom: {
           services: Buffer.from("0904000000000000", "hex"),
-          iPAddress: "::",
+          ip: "::",
           port: 0,
         },
         nonce: Buffer.from("72036dbc6d407f7f", "hex"),

@@ -1,5 +1,5 @@
-import { MAGIC } from "../../models/p2p/MAGIC";
-import { InvMessage } from "../../models/p2p/Inventory";
+import { MAGIC } from "../../../models/p2p/MAGIC";
+import { InvMessage } from "../../../models/p2p/Inventory";
 
 type InvMessageData = {
   hex: string;
