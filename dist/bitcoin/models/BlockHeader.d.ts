@@ -1,9 +1,11 @@
-export declare type BlockHeader = {
+export interface BlockHeaderBase {
     version: number;
     prevBlock: string;
     merkleRoot: string;
     timestamp: number;
     bits: number;
     nonce: number;
+}
+export interface BlockHeader extends BlockHeaderBase {
     txnCount: number;
-};
+}
