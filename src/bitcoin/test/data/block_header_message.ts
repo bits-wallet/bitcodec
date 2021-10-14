@@ -54,4 +54,24 @@ export const datas: BlockHeadersMessageData[] = [
       ],
     },
   },
+  {
+    hex: "f9beb4d9686561646572730000000000520000003d3370e50100006020090f2f21c4b0e45d5bf9a73b2e71feccd44f12015669d84836000000000000009c44857133185f2f42a0fb78507b4805398b168bf698b133a10e35935bc09ad47d886861174443197e10d5dc05",
+    raw: {
+      magic: MAGIC.Mainnet,
+      command: "headers",
+      length: 82,
+      checksum: "3d3370e5",
+      payload: [
+        {
+          version: 543162368,
+          prevBlock: "090f2f21c4b0e45d5bf9a73b2e71feccd44f12015669d8483600000000000000",
+          merkleRoot: "9c44857133185f2f42a0fb78507b4805398b168bf698b133a10e35935bc09ad4",
+          timestamp: 1634240637,
+          bits: 423838743,
+          nonce: 3704950910,
+          txnCount: 5,
+        },
+      ],
+    },
+  },
 ];
