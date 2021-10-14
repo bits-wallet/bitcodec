@@ -7,7 +7,7 @@ export const BlockHeaderCodec = bitcodec.Object([
   ["timestamp", bitcodec.Number.UInt32LE],
   ["bits", bitcodec.Number.UInt32LE],
   ["nonce", bitcodec.Number.UInt32LE],
-  ["txnCount", bitcodec.Number.UInt8],
+  ["txnCount", bitcodec.VarUIntBitcoin], // bitcoin core (getblockheader hex-encoded data) doesn't provide this byte(s)!
 ]);
 
 export const BlockHeaderArrayCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, BlockHeaderCodec);
