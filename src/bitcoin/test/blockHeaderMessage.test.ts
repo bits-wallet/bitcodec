@@ -26,8 +26,6 @@ test("block_header encode:", () => {
   const blockHeaderPayloadBuffer = bitcoin.BlockHeadersCodec.encode(hex2buffer(testData.raw.payload));
   const blockHeaderPayloadHex: string = buffer2hex(blockHeaderPayloadBuffer);
 
-  console.log(blockHeaderPayloadHex);
-
   const blcokHeaderMessageStructure: MessageStructure<string> = {
     magic: testData.raw.magic,
     command: testData.raw.command,
