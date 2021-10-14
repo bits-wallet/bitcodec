@@ -3,6 +3,6 @@ import { MessageStructureCodec } from "./bitcoin/MessageStructureCodec";
 import { VersionCodec } from "./bitcoin/VersionCodec";
 import { TxCodec } from "./bitcoin/TxCodec";
 import { InventoriesCodec } from "./bitcoin/InventoriesCodec";
-import { BlockHeadersCodec } from "./bitcoin/BlockHeadersCodec";
+import { BlockHeaderCodec, BlockHeaderArrayCodec } from "./bitcoin/BlockHeadersCodec";
 
-export { MessageStructureCodec, VersionCodec, InventoriesCodec, TxCodec, BlockHeadersCodec };
+export { MessageStructureCodec, VersionCodec, InventoriesCodec, TxCodec, BlockHeaderCodec, BlockHeaderArrayCodec };

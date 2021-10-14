@@ -1,6 +1,6 @@
 import bitcodec from "..";
 
-const blockHeader = bitcodec.Object([
+export const BlockHeaderCodec = bitcodec.Object([
   ["version", bitcodec.Number.Int32LE],
   ["prevBlock", bitcodec.Buffer(32)],
   ["merkleRoot", bitcodec.Buffer(32)],
@@ -10,4 +10,4 @@ const blockHeader = bitcodec.Object([
   ["txnCount", bitcodec.Number.UInt8],
 ]);
 
-export const BlockHeadersCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, blockHeader);
+export const BlockHeaderArrayCodec = bitcodec.VarArray(bitcodec.VarUIntBitcoin, BlockHeaderCodec);
