@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { IBitcodec } from "../../../models/IBitcodec";
 declare class _BooleanCodec implements IBitcodec<boolean> {
     private byteCodec;

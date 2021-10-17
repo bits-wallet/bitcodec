@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { IBitcodec } from "../../models/IBitcodec";
 export declare class WitnessLocktimeCodec implements IBitcodec<{
     witnessScriptsArray: string[][];

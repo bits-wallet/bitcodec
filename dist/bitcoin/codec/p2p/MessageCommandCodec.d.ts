@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { IBitcodec } from "../../../models/IBitcodec";
 export declare class MessageCommandCodec implements IBitcodec<string> {
     private buffer12;

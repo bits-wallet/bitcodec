@@ -4,4 +4,5 @@ import { VersionCodec } from "./bitcoin/codec/p2p/VersionCodec";
 import { TxCodec } from "./bitcoin/codec/TxCodec";
 import { InventoriesCodec } from "./bitcoin/codec/p2p/InventoriesCodec";
 import * as helper from "./bitcoin/helper";
-export { MessageStructureCodec, VersionCodec, InventoriesCodec, TxCodec, BlockHeaderCodec, BlockHeaderArrayCodec, helper };
+import * as model from "./bitcoin/models";
+export { model, MessageStructureCodec, VersionCodec, InventoriesCodec, TxCodec, BlockHeaderCodec, BlockHeaderArrayCodec, helper };
