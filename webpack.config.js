@@ -3,11 +3,10 @@ const path = require("path");
 module.exports = (env) => {
   return {
     entry: {
-      bitcodec: "./src/index.ts",
+      index: "./src/index.ts",
+      bitcoin: "./src/bitcoin.ts",
     },
     output: {
-      filename: "index.js",
-      library: "[name]",
       path: path.resolve(__dirname, "dist"),
       libraryTarget: "commonjs2",
     },
@@ -24,6 +23,9 @@ module.exports = (env) => {
     },
     resolve: {
       extensions: [".ts", ".js", ".d.ts"],
+      fallback: {
+        os: require.resolve("os-browserify/browser"),
+      },
     },
   };
 };
