@@ -4,7 +4,6 @@ module.exports = (env) => {
   return {
     entry: {
       index: "./src/index.ts",
-      bitcoin: "./src/bitcoin.ts",
     },
     output: {
       path: path.resolve(__dirname, "dist"),
@@ -23,9 +22,6 @@ module.exports = (env) => {
     },
     resolve: {
       extensions: [".ts", ".js", ".d.ts"],
-      fallback: {
-        os: require.resolve("os-browserify/browser"),
-      },
     },
   };
 };
