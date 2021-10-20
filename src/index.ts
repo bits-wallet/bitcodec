@@ -36,3 +36,4 @@ const bitcodec = {
 
 export default bitcodec;
 export { IBitcodec };
+export { hex2buffer, buffer2hex } from "./util";
