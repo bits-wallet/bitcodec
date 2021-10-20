@@ -11,6 +11,15 @@ export const checkBufferLengthForDecode = (codecName: string, offset: number, en
   if (end - offset < codecLength) throw new RangeError(`${codecName} Codec: not enough data for decode. offset = ${offset}, end = ${end}, codecLength = ${codecLength}.`);
 };
 
-export const checkDefined = (codecName: string, value?: any, type: "buffer" | "object" | "number" | "array" = "object") => {
+export const checkDefined = (codecName: string, value?: any, type: "object" | "array" | "buffer" | "number" | "string" = "object") => {
   if (value === undefined) throw new TypeError(`${codecName} Codec: value must be ${type} but got undefined.`);
+  if (type === "buffer" && !Buffer.isBuffer(value)) throw new TypeError(`${codecName} Codec: value must be ${type} but got undefined.`);
+};
+
+export const typeError = (codecName: string, message: string) => {
+  throw new TypeError(`${codecName} Codec: ${message}.`);
+};
+
+export const rangeError = (codecName: string, message: string) => {
+  throw new RangeError(`${codecName} Codec: ${message}.`);
 };
