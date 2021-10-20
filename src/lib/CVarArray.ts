@@ -1,18 +1,21 @@
 import * as util from "../util";
 import { IBitcodec } from "../models/IBitcodec";
 import { CBuffer } from "./CBuffer";
+import { checkDefined } from "../errors";
 
 export class CVarArray implements IBitcodec<any[]> {
+  private codecName = "CVarArray";
   private length: number = -1;
   private lengthType: IBitcodec<any>;
   private anyCodec: IBitcodec<any>;
 
   private calcLength = (items: any[]) => {
-    return util.size(items, this.anyCodec.encodingLength, this.lengthType.encodingLength(items.length));
+    return util.calcAllLength(items, this.anyCodec.encodingLength, this.lengthType.encodingLength(items.length));
   };
 
   encodingLength = (array?: any[]): number => {
-    if (array === undefined) throw new TypeError("value must be an Array instance");
+    checkDefined(this.codecName, array, "array");
+    if (array === undefined) return 0; // never
     return this.calcLength(array);
   };
 
@@ -37,7 +40,7 @@ export class CVarArray implements IBitcodec<any[]> {
       }, this.lengthType.encodeBytes + offset) - offset; */
 
     this.encodeBytes =
-      util.size(
+      util.calcAllLength(
         value,
         (item, index, loffset) => {
           this.anyCodec.encode(item, buffer, loffset);
@@ -61,7 +64,7 @@ export class CVarArray implements IBitcodec<any[]> {
       }, this.lengthType.decodeBytes + offset) - offset; */
 
     this.decodeBytes =
-      util.size(
+      util.calcAllLength(
         items,
         (item, index, loffset) => {
           items[index || 0] = this.anyCodec.decode(buffer, loffset, end);
