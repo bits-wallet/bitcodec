@@ -1,14 +1,16 @@
+import { checkBufferLengthForDecode, checkBufferLengthForEncode, checkLength } from "../errors";
 import { EncodingType } from "../models/EncodingType";
 import { IBitcodec } from "../models/IBitcodec";
 import { CBuffer } from "./CBuffer";
 
 // https://en.bitcoin.it/wiki/Protocol_documentation#Variable_length_string
 export class CString implements IBitcodec<string> {
+  private codecName = "String";
   private length: number;
   private bufferCodec: IBitcodec<Buffer>;
   private encodingType: EncodingType;
 
-  encodingLength: (value?: string) => number;
+  encodingLength = (value?: string) => this.length;
 
   encodeBytes: number;
   decodeBytes: number;
@@ -20,18 +22,20 @@ export class CString implements IBitcodec<string> {
 
     this.encodeBytes = length;
     this.decodeBytes = length;
-
-    this.encodingLength = (value?: string) => this.length;
   }
 
   encode = (value: string, buffer?: Buffer, offset = 0): Buffer => {
-    if (Buffer.byteLength(value, this.encodingType) !== this.length) throw new RangeError("value.length is out of bounds");
+    checkLength(this.codecName, Buffer.byteLength(value, this.encodingType), this.length);
+
     if (!buffer) return Buffer.from(value, this.encodingType);
-    if (offset + this.length > buffer.length) throw new RangeError("destination buffer is too small");
+    checkBufferLengthForEncode(this.codecName, buffer, offset, this.length);
 
     buffer.write(value, offset, length, this.encodingType);
     return buffer;
   };
 
-  decode = (buffer: Buffer, offset = 0, end?: number): string => this.bufferCodec.decode(buffer, offset, end).toString(this.encodingType);
+  decode = (buffer: Buffer, offset = 0, end?: number): string => {
+    checkBufferLengthForDecode(this.codecName, offset, end || buffer.length, this.length);
+    return this.bufferCodec.decode(buffer, offset, end).toString(this.encodingType);
+  };
 }
