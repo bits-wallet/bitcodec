@@ -1,4 +1,4 @@
-import bitcodec from "../..";
+import bitcodec from "../src";
 import { datas } from "./data/var_uint_bitcoin";
 
 // valid

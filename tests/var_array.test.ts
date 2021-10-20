@@ -1,4 +1,4 @@
-import bitcodec from "../..";
+import bitcodec from "../src";
 
 const varArray = bitcodec.VarArray(bitcodec.Number.UInt32BE, bitcodec.Buffer(42));
 
