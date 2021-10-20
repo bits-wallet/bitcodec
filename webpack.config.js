@@ -22,9 +22,6 @@ module.exports = (env) => {
     },
     resolve: {
       extensions: [".ts", ".js", ".d.ts"],
-      fallback: {
-        buffer: require.resolve("buffer"),
-      },
     },
   };
 };
