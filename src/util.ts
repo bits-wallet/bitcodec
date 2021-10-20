@@ -1,7 +1,7 @@
-export const size = <T>(items: T[], iter: (item?: T, index?: number, ac?: number) => number, acc: number = 0) => {
-  let result = acc;
-  for (let i = 0; i < items.length; i++) result += iter(items[i], i, result);
-  return result;
+export const calcAllLength = <T>(items: T[], calcLength: (item?: T, itemIndex?: number, itemOffset?: number) => number, allOffset: number = 0) => {
+  let lOffset = allOffset;
+  for (let i = 0; i < items.length; i++) lOffset += calcLength(items[i], i, lOffset);
+  return lOffset;
 
   /* return items.reduce((previusValue, currentItem, currentIndex) => {
     return previusValue + iter(items[currentIndex], currentIndex, previusValue);

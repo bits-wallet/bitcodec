@@ -1,18 +1,21 @@
 import * as util from "../util";
 import { IBitcodec } from "../models/IBitcodec";
 import { CBuffer } from "./CBuffer";
+import { checkDefined, checkLength } from "../errors";
 
 export class CArray implements IBitcodec<any[]> {
+  private codecName = "CArray";
   private length: number;
   private anyCodec: IBitcodec<any>;
 
   private calcLength = (items: any[]) => {
-    return util.size(items, this.anyCodec.encodingLength);
+    return util.calcAllLength(items, this.anyCodec.encodingLength);
   };
 
   encodingLength = (array?: any[]): number => {
-    if (array === undefined) throw new TypeError("value must be an Array instance");
-    if (array.length !== this.length) throw new RangeError("value.length is out of bounds");
+    checkDefined(this.codecName, array, "array");
+    if (array === undefined) return 0; // never
+    checkLength(this.codecName, array.length, this.length);
     return this.calcLength(array);
   };
 
@@ -27,9 +30,9 @@ export class CArray implements IBitcodec<any[]> {
   }
 
   encode = (value: any[], buffer?: Buffer, offset = 0): Buffer => {
-    if (value.length !== this.length) throw new RangeError("value.length is out of bounds");
-    if (!buffer) buffer = Buffer.allocUnsafe(this.calcLength(value));
+    checkLength(this.codecName, value.length, this.length);
 
+    if (!buffer) buffer = Buffer.allocUnsafe(this.calcLength(value));
     const typeEncode = this.anyCodec.encode;
     const typeEncodeBytes = this.anyCodec.encodeBytes;
 
@@ -41,7 +44,7 @@ export class CArray implements IBitcodec<any[]> {
       }, offset) - offset; */
 
     this.encodeBytes =
-      util.size(
+      util.calcAllLength(
         value,
         function (item, index, loffset) {
           typeEncode(item, buffer, loffset);
@@ -67,7 +70,7 @@ export class CArray implements IBitcodec<any[]> {
       }, offset + offset) - offset; */
 
     this.decodeBytes =
-      util.size(
+      util.calcAllLength(
         items,
         function (item, index, loffset) {
           items[index || 0] = typeDecode(buffer, loffset, end);
