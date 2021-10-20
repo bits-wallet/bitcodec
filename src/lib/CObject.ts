@@ -1,7 +1,9 @@
+import { checkBufferLengthForEncode, checkDefined } from "../errors";
 import { BitcodecItem } from "../models/BitcodecItem";
 import { IBitcodec } from "../models/IBitcodec";
 
 export class CObject implements IBitcodec<object> {
+  private codecName = "CObject";
   private items: { name: string; type: IBitcodec<any> }[];
 
   encodeBytes: number;
@@ -15,7 +17,9 @@ export class CObject implements IBitcodec<object> {
     this.decodeBytes = 0;
 
     this.encodingLength = (o?: object): number => {
-      if (o === undefined) throw new TypeError("Expected Object, got " + o);
+      checkDefined(this.codecName, o, "object");
+      if (o === undefined) return 0; // never
+
       return this.items.reduce((previousValue: number, currentValue: { name: string; type: IBitcodec<any> }) => {
         const value = (o as any)[currentValue.name];
         return previousValue + currentValue.type.encodingLength(value);
@@ -24,16 +28,17 @@ export class CObject implements IBitcodec<object> {
   }
 
   encode = (object: object, buffer?: Buffer, offset = 0): Buffer => {
+    const start = offset;
     const bytes = this.encodingLength(object);
     if (buffer === undefined) buffer = Buffer.allocUnsafe(bytes);
-    else if (buffer.length - offset < bytes) throw new RangeError("destination buffer is too small");
+    else checkBufferLengthForEncode(this.codecName, buffer, offset, bytes);
 
     this.items.forEach((item) => {
       const value = (object as any)[item.name];
       item.type.encode(value, buffer, offset);
       offset += item.type.encodeBytes;
     });
-    this.encodeBytes = bytes;
+    this.encodeBytes = offset - start;
     return buffer;
   };
 

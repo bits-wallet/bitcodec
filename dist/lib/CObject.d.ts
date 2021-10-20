@@ -1,6 +1,7 @@
 import { BitcodecItem } from "../models/BitcodecItem";
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CObject implements IBitcodec<object> {
+    private codecName;
     private items;
     encodeBytes: number;
     decodeBytes: number;

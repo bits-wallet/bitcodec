@@ -2,7 +2,7 @@
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CAllBuffer implements IBitcodec<Buffer> {
     private length;
-    encodingLength: () => number;
+    encodingLength: (buffer?: Buffer | undefined) => number;
     encodeBytes: number;
     decodeBytes: number;
     constructor();

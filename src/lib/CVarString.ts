@@ -1,8 +1,10 @@
+import { checkDefined } from "../errors";
 import { EncodingType } from "../models/EncodingType";
 import { IBitcodec } from "../models/IBitcodec";
 import { CVarBuffer } from "./CVarBuffer";
 
 export class CVarString implements IBitcodec<string> {
+  private codecName = "CVarString";
   private anyCodec: IBitcodec<any>;
   private encodingType: EncodingType;
   private varBufferCodec: CVarBuffer;
@@ -20,7 +22,9 @@ export class CVarString implements IBitcodec<string> {
     this.decodeBytes = 0;
 
     this.encodingLength = (value?: string) => {
-      if (value === undefined) throw new TypeError("value must be a string");
+      checkDefined(this.codecName, value, "string");
+      if (value === undefined) return 0; // never;
+
       const valueLength = Buffer.byteLength(value, this.encodingType);
       return this.anyCodec.encodingLength(value.length) + valueLength;
     };

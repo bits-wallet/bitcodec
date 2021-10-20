@@ -14,7 +14,7 @@ import { CVarBuffer } from "./lib/CVarBuffer";
 import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
 
-export default {
+const bitcodec = {
   AllBuffer: new CAllBuffer(),
   Array: (length: number, anyCodec: IBitcodec<any>) => new CArray(length, anyCodec),
   Buffer: (length: number) => new CBuffer(length),
@@ -46,3 +46,5 @@ export default {
   VarString: (anyCodec: IBitcodec<any>, encodingType: EncodingType = "utf8") => new CVarString(anyCodec, encodingType),
   VarUIntBitcoin: new CVarUIntBitcoin(),
 };
+
+export default bitcodec;

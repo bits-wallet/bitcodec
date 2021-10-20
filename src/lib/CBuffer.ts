@@ -1,6 +1,8 @@
+import { checkLength, checkBufferLengthForEncode, checkBufferLengthForDecode, checkDefined } from "../errors";
 import { IBitcodec } from "../models/IBitcodec";
 
 export class CBuffer implements IBitcodec<Buffer> {
+  private codecName = "Buffer";
   private length: number;
   encodingLength = (): number => this.length;
 
@@ -14,17 +16,20 @@ export class CBuffer implements IBitcodec<Buffer> {
   }
 
   encode = (value: Buffer, buffer?: Buffer, offset = 0): Buffer => {
-    if (!Buffer.isBuffer(value)) throw new TypeError("value must be a Buffer instance"); // for CArray encode iter
-    if (value.length !== this.length) throw new RangeError("value.length is out of bounds");
+    checkDefined(this.codecName, value, "buffer");
+    checkLength(this.codecName, value.length, this.length);
+
     if (!buffer) return Buffer.from(value);
-    if (offset + this.length > buffer.length) throw new RangeError("destination buffer is too small");
+    checkBufferLengthForEncode(this.codecName, buffer, offset, this.length);
+
     value.copy(buffer, offset);
     return buffer;
   };
 
   decode = (buffer: Buffer, offset = 0, end?: number): Buffer => {
     if (!end) end = buffer.length;
-    if (offset + this.length > end) throw new RangeError("not enough data for decode");
+    checkBufferLengthForDecode(this.codecName, offset, end, this.length);
+
     return Buffer.from(buffer.slice(offset, offset + this.length));
   };
 }

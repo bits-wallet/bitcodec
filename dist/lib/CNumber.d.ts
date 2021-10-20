@@ -4,7 +4,7 @@ export declare class CNumber implements IBitcodec<number> {
     private length;
     private write;
     private read;
-    encodingLength: () => number;
+    encodingLength: (number?: number | undefined) => number;
     encodeBytes: number;
     decodeBytes: number;
     constructor(numberType: NumberTypes, length: number);

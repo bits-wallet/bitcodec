@@ -1,5 +1,6 @@
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CVarArray implements IBitcodec<any[]> {
+    private codecName;
     private length;
     private lengthType;
     private anyCodec;

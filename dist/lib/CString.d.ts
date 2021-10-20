@@ -1,10 +1,11 @@
 import { EncodingType } from "../models/EncodingType";
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CString implements IBitcodec<string> {
+    private codecName;
     private length;
     private bufferCodec;
     private encodingType;
-    encodingLength: (value?: string) => number;
+    encodingLength: (value?: string | undefined) => number;
     encodeBytes: number;
     decodeBytes: number;
     constructor(length: number, encodingType?: EncodingType);

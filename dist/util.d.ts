@@ -1,1 +1,1 @@
-export declare const size: <T>(items: T[], iter: (item?: T | undefined, index?: number | undefined, ac?: number | undefined) => number, acc?: number) => number;
+export declare const calcAllLength: <T>(items: T[], calcLength: (item?: T | undefined, itemIndex?: number | undefined, itemOffset?: number | undefined) => number, allOffset?: number) => number;

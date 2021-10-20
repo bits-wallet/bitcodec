@@ -7,7 +7,7 @@ export class CNumber implements IBitcodec<number> {
   private write: (buffer: Buffer, value: number, offset?: number) => void;
   private read: (buffer: Buffer, offset?: number | undefined) => number;
 
-  encodingLength = (): number => this.length;
+  encodingLength = (number?: number): number => this.length;
 
   encodeBytes: number;
   decodeBytes: number;
@@ -40,7 +40,6 @@ export class CNumber implements IBitcodec<number> {
 
   encode = (value: number, buffer?: Buffer, offset = 0): Buffer => {
     buffer = buffer || Buffer.allocUnsafe(this.length);
-
     this.write(buffer, value, offset);
     return buffer;
   };
