@@ -1,4 +1,4 @@
-import { checkDefined } from "../errors";
+import { checkDefined, rangeError, typeError } from "../errors";
 import { IBitcodec } from "../models/IBitcodec";
 
 // https://en.bitcoin.it/wiki/Protocol_documentation#Variable_length_integer
@@ -7,7 +7,8 @@ export class CVarUIntBitcoin implements IBitcodec<number> {
   private MAX_SAFE_INTEGER: number = 9007199254740991;
 
   private checkUInt53 = (n: number) => {
-    if (n < 0 || n > this.MAX_SAFE_INTEGER || n % 1 !== 0) throw new RangeError("value out of range");
+    if (n < 0 || n > this.MAX_SAFE_INTEGER) rangeError(this.codecName, `out of range value. min = 0, max = ${this.MAX_SAFE_INTEGER}, value = ${n}`);
+    if (n % 1 !== 0) typeError(this.codecName, `value is not an integer. value = ${n}`);
   };
 
   encodeBytes: number;

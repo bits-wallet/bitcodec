@@ -1,6 +1,5 @@
 import * as util from "../util";
 import { IBitcodec } from "../models/IBitcodec";
-import { CBuffer } from "./CBuffer";
 import { checkDefined, checkLength } from "../errors";
 
 export class CArray implements IBitcodec<any[]> {

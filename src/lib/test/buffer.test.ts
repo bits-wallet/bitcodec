@@ -1,4 +1,4 @@
-import bitcodec from "../";
+import bitcodec from "../..";
 
 const buffer42 = bitcodec.Buffer(42);
 
@@ -7,9 +7,9 @@ test("Buffer encodingLength", () => {
 });
 
 test("Buffer encode errors", () => {
-  expect(() => buffer42.encode(Buffer.allocUnsafe(41))).toThrow("value.length is out of bounds");
-  expect(() => buffer42.encode(Buffer.allocUnsafe(42), Buffer.allocUnsafe(42), 1)).toThrow("destination buffer is too small");
-  expect(() => buffer42.decode(Buffer.allocUnsafe(42), 1)).toThrow("not enough data for decode");
+  expect(() => buffer42.encode(Buffer.allocUnsafe(41))).toThrow("Buffer Codec: value length is not equal codec length. valueLength = 41, codecLength = 42.");
+  expect(() => buffer42.encode(Buffer.allocUnsafe(42), Buffer.allocUnsafe(42), 1)).toThrow("Buffer Codec: buffer is too small. buffer.length = 42, offset = 1, codecLength = 42.");
+  expect(() => buffer42.decode(Buffer.allocUnsafe(42), 1)).toThrow("Buffer Codec: not enough data for decode. offset = 1, end = 42, codecLength = 42.");
 });
 
 test("Buffer encode", () => {

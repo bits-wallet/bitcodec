@@ -1,9 +1,11 @@
-import bitcodec from "../";
+import bitcodec from "../..";
 
 const objectCodec = bitcodec.Object([{ name: "number", type: bitcodec.Number.UInt8 }, ["foobar", bitcodec.Buffer(8)]]);
 
 test("object encode 1", () => {
-  expect(() => objectCodec.encode({ number: 0xfe, foobar: Buffer.alloc(8) }, Buffer.allocUnsafe(3))).toThrow("destination buffer is too small");
+  expect(() => objectCodec.encode({ number: 0xfe, foobar: Buffer.alloc(8) }, Buffer.allocUnsafe(3))).toThrow(
+    "CObject Codec: buffer is too small. buffer.length = 3, offset = 0, codecLength = 9."
+  );
 });
 
 test("object encode 2", () => {
@@ -26,7 +28,7 @@ test("object encode 2", () => {
 
 test("object encode 2", () => {
   const o = { number: 0xfe, foobar: Buffer.alloc(8) };
-  expect(() => objectCodec.decode(Buffer.from("deadbe", "hex"))).toThrow("not enough data for decode");
+  expect(() => objectCodec.decode(Buffer.from("deadbe", "hex"))).toThrow("Buffer Codec: not enough data for decode. offset = 1, end = 3, codecLength = 8.");
 
   objectCodec.decode(Buffer.from("fe0000000000000000ffffffffff", "hex"));
 

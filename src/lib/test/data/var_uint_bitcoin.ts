@@ -1,4 +1,4 @@
-export const varUIntBitcoinData = {
+export const datas = {
   valid: [
     {
       dec: 0,
@@ -60,16 +60,16 @@ export const varUIntBitcoinData = {
   invalid: [
     {
       dec: -1,
-      msg: "value out of range",
+      msg: "VarUIntBitcoin Codec: out of range value. min = 0, max = 9007199254740991, value = -1.",
     },
     {
       dec: 9007199254740992,
-      hex: "ffffffffff00002000",
-      msg: "value out of range",
+      hex: "ff0000000000002000",
+      msg: "VarUIntBitcoin Codec: out of range value. min = 0, max = 9007199254740991, value = 9007199254740992.",
     },
     {
       dec: 0.1,
-      msg: "value out of range",
+      msg: "VarUIntBitcoin Codec: value is not an integer. value = 0.1.",
     },
   ],
 };

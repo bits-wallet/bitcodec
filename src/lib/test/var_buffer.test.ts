@@ -1,9 +1,9 @@
-import bitcodec from "../";
+import bitcodec from "../..";
 
 const varBuffer = bitcodec.VarBuffer(bitcodec.Number.UInt32BE);
 
 test("encode", () => {
-  expect(() => varBuffer.encode(Buffer.allocUnsafe(42), Buffer.allocUnsafe(41))).toThrow("destination buffer is too small");
+  expect(() => varBuffer.encode(Buffer.allocUnsafe(42), Buffer.allocUnsafe(41))).toThrow("VarBuffer Codec: buffer is too small. buffer.length = 41, offset = 0, codecLength = 46.");
 
   const buf = Buffer.alloc(42, 0xfe);
   const result = varBuffer.encode(buf);
@@ -24,7 +24,9 @@ test("decode", () => {
   const buf = Buffer.allocUnsafe(46);
   buf.writeUInt32BE(42, 0);
 
-  expect(() => varBuffer.decode(Buffer.concat([Buffer.from([0x00]), buf.slice(0, 45)]), 1)).toThrow("not enough data for decode");
+  expect(() => varBuffer.decode(Buffer.concat([Buffer.from([0x00]), buf.slice(0, 45)]), 1)).toThrow(
+    "VarBuffer Codec: not enough data for decode. offset = 5, end = 46, codecLength = 42."
+  );
 
   const result = varBuffer.decode(buf);
   expect(varBuffer.decodeBytes).toEqual(46);
@@ -32,7 +34,7 @@ test("decode", () => {
 });
 
 test("encodingLength", () => {
-  expect(() => varBuffer.encodingLength()).toThrow("value must be a Buffer instance");
+  expect(() => varBuffer.encodingLength()).toThrow("VarBuffer Codec: value must be buffer but got undefined.");
 
   expect(varBuffer.encodingLength(Buffer.allocUnsafe(42))).toEqual(46); // 4 + 42
 });

@@ -1,4 +1,4 @@
-import { checkLength, checkBufferLengthForEncode, checkBufferLengthForDecode } from "../errors";
+import { checkLength, checkBufferLengthForEncode, checkBufferLengthForDecode, checkDefined } from "../errors";
 import { IBitcodec } from "../models/IBitcodec";
 
 export class CBuffer implements IBitcodec<Buffer> {
@@ -16,6 +16,7 @@ export class CBuffer implements IBitcodec<Buffer> {
   }
 
   encode = (value: Buffer, buffer?: Buffer, offset = 0): Buffer => {
+    checkDefined(this.codecName, value, "buffer");
     checkLength(this.codecName, value.length, this.length);
 
     if (!buffer) return Buffer.from(value);

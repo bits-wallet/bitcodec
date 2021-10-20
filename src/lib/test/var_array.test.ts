@@ -1,4 +1,4 @@
-import bitcodec from "../";
+import bitcodec from "../..";
 
 const varArray = bitcodec.VarArray(bitcodec.Number.UInt32BE, bitcodec.Buffer(42));
 
@@ -23,9 +23,8 @@ test("VarArray decode errors", () => {
   const buf = Buffer.allocUnsafe(1768);
   buf.writeUInt32BE(42, 0);
 
-  expect(() => varArray.decode(buf.slice(1))).toThrow("not enough data for decode");
-  expect(() => varArray.decode(buf, 1)).toThrow("not enough data for decode");
-  expect(() => varArray.decode(buf, 1)).toThrow("not enough data for decode");
+  expect(() => varArray.decode(buf.slice(1))).toThrow("Buffer Codec: not enough data for decode. offset = 1726, end = 1767, codecLength = 42.");
+  expect(() => varArray.decode(buf, 1)).toThrow("Buffer Codec: not enough data for decode. offset = 1727, end = 1768, codecLength = 42.");
 
   const buffers = varArray.decode(buf);
   expect(varArray.decodeBytes).toEqual(1768);
@@ -36,7 +35,7 @@ test("VarArray decode errors", () => {
 });
 
 test("VarArray encodingLength errors", () => {
-  expect(() => varArray.encodingLength()).toThrow("value must be an Array instance");
+  expect(() => varArray.encodingLength()).toThrow("CVarArray Codec: value must be array but got undefined.");
 });
 
 test("VarArray encodingLength for 42 items", () => {
