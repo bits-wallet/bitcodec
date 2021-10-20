@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CBuffer implements IBitcodec<Buffer> {
+    private codecName;
     private length;
     encodingLength: () => number;
     encodeBytes: number;

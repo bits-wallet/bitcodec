@@ -1,6 +1,7 @@
 import { EncodingType } from "../models/EncodingType";
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CVarString implements IBitcodec<string> {
+    private codecName;
     private anyCodec;
     private encodingType;
     private varBufferCodec;

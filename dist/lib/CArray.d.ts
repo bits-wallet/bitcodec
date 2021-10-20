@@ -1,5 +1,6 @@
 import { IBitcodec } from "../models/IBitcodec";
 export declare class CArray implements IBitcodec<any[]> {
+    private codecName;
     private length;
     private anyCodec;
     private calcLength;

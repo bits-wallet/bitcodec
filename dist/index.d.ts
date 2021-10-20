@@ -11,7 +11,7 @@ import { CVarArray } from "./lib/CVarArray";
 import { CVarBuffer } from "./lib/CVarBuffer";
 import { CVarString } from "./lib/CVarString";
 import { CVarUIntBitcoin } from "./lib/CVarUIntBitcoin";
-declare const _default: {
+declare const bitcodec: {
     AllBuffer: CAllBuffer;
     Array: (length: number, anyCodec: IBitcodec<any>) => CArray;
     Buffer: (length: number) => CBuffer;
@@ -43,4 +43,4 @@ declare const _default: {
     VarString: (anyCodec: IBitcodec<any>, encodingType?: EncodingType) => CVarString;
     VarUIntBitcoin: CVarUIntBitcoin;
 };
-export default _default;
+export default bitcodec;
