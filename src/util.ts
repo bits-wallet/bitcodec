@@ -14,7 +14,7 @@ const copy = (obj: any): any => {
   if (typeof obj === "object") {
     const newObj: any = {};
     for (let k in obj) {
-      newObj[k] = obj.map(copy);
+      newObj[k] = copy(obj[k]);
     }
     return newObj;
   }
