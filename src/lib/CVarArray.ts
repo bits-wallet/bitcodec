@@ -18,8 +18,8 @@ export class CVarArray implements IBitcodec<any[]> {
     return this.calcLength(array);
   };
 
-  encodeBytes: number = -1;
-  decodeBytes: number = -1;
+  encodeBytes: number = 0;
+  decodeBytes: number = 0;
 
   constructor(lengthCodec: IBitcodec<any>, itemCodec: IBitcodec<any>) {
     this.lengthCodec = lengthCodec;

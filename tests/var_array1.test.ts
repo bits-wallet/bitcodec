@@ -3,13 +3,13 @@ import datas from "./data/var_array";
 
 datas.forEach((data, i) => {
   test("array encodeBytes i:" + i, () => {
-    expect(data.codec.encodeBytes).toEqual(-1);
+    expect(data.codec.encodeBytes).toEqual(0);
   });
 });
 
 datas.forEach((data, i) => {
   test("array decodeBytes i:" + i, () => {
-    expect(data.codec.decodeBytes).toEqual(-1);
+    expect(data.codec.decodeBytes).toEqual(0);
   });
 });
 
