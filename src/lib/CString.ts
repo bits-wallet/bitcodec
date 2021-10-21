@@ -30,7 +30,7 @@ export class CString implements IBitcodec<string> {
     if (!buffer) return Buffer.from(value, this.encodingType);
     checkBufferLengthForEncode(this.codecName, buffer, offset, this.length);
 
-    buffer.write(value, offset, length, this.encodingType);
+    buffer.write(value, offset, this.length, this.encodingType);
     return buffer;
   };
 
