@@ -1,42 +1,34 @@
-import bitcodec from "../src";
+import { buffer2hex, hex2buffer } from "../src";
+import datas from "./data/array";
 
-const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
-
-test("Array encode errors", () => {
-  expect(() => array42.encode(new Array(41))).toThrow("CArray Codec: value length is not equal codec length. valueLength = 41, codecLength = 42.");
-  expect(() => array42.encode(new Array(42), Buffer.allocUnsafe(3))).toThrow("Buffer Codec: value must be buffer but got undefined.");
-  expect(() => array42.encode(new Array(42), undefined, 1765)).toThrow("Buffer Codec: value must be buffer but got undefined.");
+datas.forEach((data, i) => {
+  test("array encodeBytes i:" + i, () => {
+    expect(data.codec.encodeBytes).toEqual(data.encodeBytes);
+  });
 });
 
-test("Array encode", () => {
-  const buffers = new Array(42).fill(Buffer.allocUnsafe(42));
-  const buf = array42.encode(buffers);
-  expect(array42.encodeBytes).toEqual(1764);
-  expect(buf.toString("hex")).toEqual(Buffer.concat(buffers).toString("hex"));
+datas.forEach((data, i) => {
+  test("array decodeBytes i:" + i, () => {
+    expect(data.codec.decodeBytes).toEqual(data.decodeBytes);
+  });
 });
 
-test("Array decode errors", () => {
-  expect(() => array42.decode(Buffer.allocUnsafe(1763))).toThrow("Buffer Codec: not enough data for decode. offset = 1722, end = 1763, codecLength = 42.");
-  expect(() => array42.decode(Buffer.allocUnsafe(1764), 1)).toThrow("Buffer Codec: not enough data for decode. offset = 1723, end = 1764, codecLength = 42.");
-
-  const buf = Buffer.allocUnsafe(1764);
-  const buffers = array42.decode(buf);
-  expect(array42.decodeBytes).toEqual(1764);
-
-  for (let i = 0, offset = 0; i < buffers.length; ++i, offset += 42) {
-    expect(buffers[i].toString("hex")).toEqual(buf.slice(offset, offset + 42).toString("hex"));
-  }
-
-  expect(() => array42.decode(Buffer.allocUnsafe(1764), 1)).toThrow("Buffer Codec: not enough data for decode. offset = 1723, end = 1764, codecLength = 42.");
+datas.forEach((data, i) => {
+  test("array encodingLength i:" + i, () => {
+    expect(data.codec.encodingLength(data.obj)).toEqual(data.encodingLength);
+  });
 });
 
-test("Array encodingLength errors", () => {
-  const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
-  expect(() => array42.encodingLength(new Array(41))).toThrow("CArray Codec: value length is not equal codec length. valueLength = 41, codecLength = 42.");
-  expect(() => array42.encodingLength()).toThrow("CArray Codec: value must be array but got undefined.");
+datas.forEach((data, i) => {
+  test("array decode i:" + i, () => {
+    const obj = buffer2hex(data.codec.decode(hex2buffer(data.hex)));
+    expect(obj).toEqual(data.obj);
+  });
 });
 
-test("Array encodingLength", () => {
-  const array42 = bitcodec.Array(42, bitcodec.Buffer(42));
-  expect(array42.encodingLength(new Array(42))).toEqual(42 * 42);
+datas.forEach((data, i) => {
+  test("array encode i:" + i, () => {
+    const hex = buffer2hex(data.codec.encode(hex2buffer(data.obj)));
+    expect(hex).toEqual(data.hex);
+  });
 });
