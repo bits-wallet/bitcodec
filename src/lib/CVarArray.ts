@@ -5,11 +5,11 @@ import { checkDefined } from "../errors";
 export class CVarArray implements IBitcodec<any[]> {
   private codecName = "CVarArray";
   private length: number = -1;
-  private lengthType: IBitcodec<any>;
-  private anyCodec: IBitcodec<any>;
+  private lengthCodec: IBitcodec<any>;
+  private itemCodec: IBitcodec<any>;
 
   private calcLength = (items: any[]) => {
-    return util.calcAllLength(items, this.anyCodec.encodingLength, this.lengthType.encodingLength(items.length));
+    return util.calcAllLength(items, this.itemCodec.encodingLength, this.lengthCodec.encodingLength(items.length));
   };
 
   encodingLength = (array?: any[]): number => {
@@ -21,15 +21,15 @@ export class CVarArray implements IBitcodec<any[]> {
   encodeBytes: number = -1;
   decodeBytes: number = -1;
 
-  constructor(lengthType: IBitcodec<any>, anyCodec: IBitcodec<any>) {
-    this.lengthType = lengthType;
-    this.anyCodec = anyCodec;
+  constructor(lengthCodec: IBitcodec<any>, itemCodec: IBitcodec<any>) {
+    this.lengthCodec = lengthCodec;
+    this.itemCodec = itemCodec;
   }
 
   encode = (value: any[], buffer?: Buffer, offset = 0): Buffer => {
     if (!buffer) buffer = Buffer.allocUnsafe(this.calcLength(value));
 
-    this.lengthType.encode(value.length, buffer, offset);
+    this.lengthCodec.encode(value.length, buffer, offset);
 
     /* this.encodeBytes =
       value.reduce((previusValue, currentItem, _) => {
@@ -42,10 +42,10 @@ export class CVarArray implements IBitcodec<any[]> {
       util.calcAllLength(
         value,
         (item, index, loffset) => {
-          this.anyCodec.encode(item, buffer, loffset);
-          return this.anyCodec.encodeBytes;
+          this.itemCodec.encode(item, buffer, loffset);
+          return this.itemCodec.encodeBytes;
         },
-        this.lengthType.encodeBytes + offset
+        this.lengthCodec.encodeBytes + offset
       ) - offset;
 
     return buffer;
@@ -53,7 +53,7 @@ export class CVarArray implements IBitcodec<any[]> {
 
   decode = (buffer: Buffer, offset = 0, end?: number): any[] => {
     if (!offset) offset = 0;
-    const items = new Array(this.lengthType.decode(buffer, offset, end));
+    const items = new Array(this.lengthCodec.decode(buffer, offset, end));
 
     /* this.decodeBytes =
       items.reduce((previusValue, currentItem, currentIndex) => {
@@ -66,10 +66,10 @@ export class CVarArray implements IBitcodec<any[]> {
       util.calcAllLength(
         items,
         (item, index, loffset) => {
-          items[index || 0] = this.anyCodec.decode(buffer, loffset, end);
-          return this.anyCodec.decodeBytes;
+          items[index || 0] = this.itemCodec.decode(buffer, loffset, end);
+          return this.itemCodec.decodeBytes;
         },
-        this.lengthType.decodeBytes + offset
+        this.lengthCodec.decodeBytes + offset
       ) - offset;
     return items;
   };
