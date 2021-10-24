@@ -1,5 +1,5 @@
 import { buffer2hex, hex2buffer } from "../src";
-import datas from "./data/object";
+import datas from "./data/object1";
 
 datas.forEach((data, i) => {
   test("object encodeBytes i:" + i, () => {
